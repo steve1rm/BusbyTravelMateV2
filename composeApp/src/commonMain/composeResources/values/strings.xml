@@ -1,0 +1,29 @@
+<resources>
+    <string name="app_name">Busby Travel Mate</string>
+    <string name="show_password">show password</string>
+    <string name="hide_password">hide password</string>
+    <string name="go_back">Go back</string>
+    <string name="busbyrunner">Busby Runner</string>
+    <string name="welcome_to_busbyrunner">Welcome to Busby Runner!</string>
+    <string name="busbyrunner_description">Track your runs, set goals and achieve fitness milestones with our intuitive app.</string>
+    <string name="sign_up">Sign up</string>
+    <string name="sign_in">Sign in</string>
+    <string name="create_account">Create account</string>
+    <string name="existing_account">Already have an account?</string>
+    <string name="login">Login</string>
+    <string name="example_email">example@text.com</string>
+    <string name="email">Email</string>
+    <string name="must_be_valid_email">Must be a valid email</string>
+    <string name="password">Password</string>
+    <string name="password_length">At least %d characters</string>
+    <string name="contain_number">At least one number</string>
+    <string name="lower_case_character">Contains lowercase character</string>
+    <string name="upper_case_character">Contains uppercase character</string>
+    <string name="register">Register</string>
+    <string name="email_exists">User with that email already exists</string>
+    <string name="registration_success">Registration successful you can login in now</string>
+    <string name="login_welcome">Hi, there</string>
+    <string name="welcome_message">"Welcome, to the Busby Login Screen. Please enter your email and password to get started. "</string>
+    <string name="dont_have_account">Don\'t have an account!</string>
+    <string name="incorrect_email_or_password">Incorrect email or password!</string>
+</resources>
