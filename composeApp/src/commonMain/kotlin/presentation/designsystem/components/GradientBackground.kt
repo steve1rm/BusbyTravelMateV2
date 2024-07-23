@@ -9,10 +9,15 @@ import androidx.compose.foundation.layout.systemBarsPadding
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.draw.blur
+import androidx.compose.ui.geometry.Offset
 import androidx.compose.ui.graphics.Brush
 import androidx.compose.ui.platform.LocalDensity
 import org.jetbrains.compose.ui.tooling.preview.Preview
 import presentation.designsystem.ui.theme.BusbyTravelMateTheme
+import presentation.isBlurSupported
+import presentation.screenWidthPx
+import presentation.smallestDimensionDp
 
 @Composable
 fun GradientBackground(
@@ -20,24 +25,16 @@ fun GradientBackground(
     hasToolbar: Boolean = true,
     content: @Composable ColumnScope.() -> Unit
 ) {
- //   val configuration = LocalConfiguration.current
     val density = LocalDensity.current
 
-   /* val screenWidthPx = with(density) {
-        configuration.screenWidthDp.dp.roundToPx()
+    val screenWidthPx = screenWidthPx()
+    val smallestDimensionDp = smallestDimensionDp()
+    val smallestDimensionPx = with(density) {
+        smallestDimensionDp.roundToPx()
     }
 
-    val smallestDimensionDp = minOf(
-        configuration.screenWidthDp.dp,
-        configuration.screenHeightDp.dp
-    )*/
-
-  /*  val smallestDimensionPx = with(density) {
-        smallestDimensionDp.roundToPx()
-    }*/
-
     val primaryColor = MaterialTheme.colorScheme.primary
-    val shouldAddBlurEffect = true //Build.VERSION.SDK_INT >= Build.VERSION_CODES.S
+    val shouldAddBlurEffect = isBlurSupported()
 
 
     Box(modifier = modifier
@@ -47,11 +44,11 @@ fun GradientBackground(
         Box(modifier = modifier
             .fillMaxSize()
             .then(
-             /*   if (shouldAddBlurEffect) {
+                if (shouldAddBlurEffect) {
                     Modifier.blur(smallestDimensionDp / 3f)
-                } else {*/
+                } else {
                     Modifier
-             //   }
+                }
             )
             .background(
                 brush = Brush.radialGradient(
@@ -60,11 +57,11 @@ fun GradientBackground(
                             alpha = 0.3f
                         ), MaterialTheme.colorScheme.background
                     ),
-/*                    center = Offset(
+                    center = Offset(
                         x = screenWidthPx / 2f,
                         y = -100f
                     ),
-                    radius = smallestDimensionPx / 2f*/
+                    radius = smallestDimensionPx / 2f
                 ),
             ))
 

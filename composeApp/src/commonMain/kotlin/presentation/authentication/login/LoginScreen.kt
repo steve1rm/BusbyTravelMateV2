@@ -64,7 +64,8 @@ fun LoginScreen(
             Text(
                 text = stringResource(resource = Res.string.login_welcome),
                 fontWeight = FontWeight.SemiBold,
-                style = MaterialTheme.typography.headlineMedium
+                style = MaterialTheme.typography.headlineMedium,
+                color = MaterialTheme.colorScheme.onSurfaceVariant
             )
 
             Text(
