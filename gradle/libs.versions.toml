@@ -14,6 +14,7 @@ kotlin = "2.0.0"
 compose = "1.6.8"
 material3Android = "1.2.1"
 gmazzo-buildconfig-version = "5.3.5"
+voyager = "1.1.0-beta02"
 
 [libraries]
 kotlin-test = { module = "org.jetbrains.kotlin:kotlin-test", version.ref = "kotlin" }
@@ -27,6 +28,13 @@ androidx-activity-compose = { module = "androidx.activity:activity-compose", ver
 androidx-material3-android = { group = "androidx.compose.material3", name = "material3-android", version.ref = "material3Android" }
 compose-ui-tooling = { module = "androidx.compose.ui:ui-tooling", version.ref = "compose" }
 compose-ui-tooling-preview = { module = "androidx.compose.ui:ui-tooling-preview", version.ref = "compose" }
+
+# Navigation
+voyager-navigator = { module = "cafe.adriel.voyager:voyager-navigator", version.ref = "voyager" }
+voyager-screen-model = { module = "cafe.adriel.voyager:voyager-screenmodel", version.ref = "voyager" }
+voyager-transitions = { module = "cafe.adriel.voyager:voyager-transitions", version.ref = "voyager" }
+voyager-koin = { module = "cafe.adriel.voyager:voyager-koin", version.ref = "voyager" }
+
 
 [plugins]
 androidApplication = { id = "com.android.application", version.ref = "agp" }

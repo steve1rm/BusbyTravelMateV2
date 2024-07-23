@@ -14,14 +14,24 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import busbytravelmatev2.composeapp.generated.resources.Res
 import busbytravelmatev2.composeapp.generated.resources.compose_multiplatform
+import cafe.adriel.voyager.navigator.Navigator
 import org.jetbrains.compose.resources.painterResource
 import org.jetbrains.compose.ui.tooling.preview.Preview
+import presentation.authentication.login.LoginScreen
+import presentation.authentication.login.LoginState
+import presentation.navigation.LoginScreenRoute
 
 @Composable
 @Preview
 fun App() {
     MaterialTheme {
-        var showContent by remember { mutableStateOf(false) }
+        Navigator(screen = LoginScreenRoute)
+    }
+}
+
+
+/*
+ var showContent by remember { mutableStateOf(false) }
         Column(Modifier.fillMaxWidth(), horizontalAlignment = Alignment.CenterHorizontally) {
             Button(onClick = { showContent = !showContent }) {
                 Text("Click me!")
@@ -34,5 +44,4 @@ fun App() {
                 }
             }
         }
-    }
-}
+ */
