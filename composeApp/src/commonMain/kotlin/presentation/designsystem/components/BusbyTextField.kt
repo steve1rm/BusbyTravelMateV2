@@ -130,7 +130,7 @@ fun BusbyTextField(
                 ) {
                     if(startIcon != null) {
                         Icon(
-                            painter = EmailIcon,
+                            imageVector = EmailIcon,
                             contentDescription = "Email icon",
                             tint = MaterialTheme.colorScheme.onSurfaceVariant
                         )

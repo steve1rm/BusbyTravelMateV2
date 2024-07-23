@@ -35,7 +35,7 @@ import busbytravelmatev2.composeapp.generated.resources.login_welcome
 import busbytravelmatev2.composeapp.generated.resources.password
 import busbytravelmatev2.composeapp.generated.resources.sign_up
 import busbytravelmatev2.composeapp.generated.resources.welcome_message
-import me.androidbox.designsystem.ui.theme.Poppins
+import presentation.designsystem.ui.theme.Poppins
 import org.jetbrains.compose.resources.stringResource
 import org.jetbrains.compose.ui.tooling.preview.Preview
 import presentation.designsystem.components.BusbyActionButton
@@ -136,7 +136,7 @@ private fun buildDescriptionAnnotatedString(): AnnotatedString {
     val annotatedString = buildAnnotatedString {
         this.withStyle(
             SpanStyle(
-                fontFamily = Poppins,
+                fontFamily = Poppins(),
                 color = MaterialTheme.colorScheme.onSurfaceVariant
             )
         ) {
@@ -151,7 +151,7 @@ private fun buildDescriptionAnnotatedString(): AnnotatedString {
 
         this.withStyle(
             SpanStyle(
-                fontFamily = Poppins,
+                fontFamily = Poppins(),
                 fontWeight = FontWeight.SemiBold,
                 color = MaterialTheme.colorScheme.primary
             )

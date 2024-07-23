@@ -1,7 +1,6 @@
 package presentation.designsystem.ui.theme
 
 import androidx.compose.runtime.Composable
-import androidx.compose.ui.graphics.painter.Painter
 import androidx.compose.ui.graphics.vector.ImageVector
 import busbytravelmatev2.composeapp.generated.resources.Res
 import busbytravelmatev2.composeapp.generated.resources.analytics
@@ -27,100 +26,98 @@ import busbytravelmatev2.composeapp.generated.resources.run
 import busbytravelmatev2.composeapp.generated.resources.run_outlined
 import busbytravelmatev2.composeapp.generated.resources.start
 import busbytravelmatev2.composeapp.generated.resources.stop
-import org.jetbrains.compose.resources.painterResource
+import org.jetbrains.compose.resources.vectorResource
 
-val AnalyticIcon: Painter
+val AnalyticIcon: ImageVector
     @Composable
     get() {
-        return painterResource(resource = Res.drawable.analytics)
+        return vectorResource(resource = Res.drawable.analytics)
     }
 
-
-val EmailIcon: Painter
+val EmailIcon: ImageVector
     @Composable
-    get() = painterResource(resource = Res.drawable.email)
+    get() = vectorResource(resource = Res.drawable.email)
 
-/*
-val ArrowLeftIcon: Painter
+val ArrowLeftIcon: ImageVector
     @Composable
-    get() = painterResource(resource = Res.drawable.arrow_left)
+    get() = vectorResource(resource = Res.drawable.arrow_left)
 
 val ArrowRightIcon: ImageVector
     @Composable
-    get() = ImageVector.vectorResource(id = Res.drawable.arrow_right)
+    get() = vectorResource(resource = Res.drawable.arrow_right)
 
 val CalendarIcon: ImageVector
     @Composable
-    get() = ImageVector.vectorResource(id = Res.drawable.calendar)
+    get() = vectorResource(resource = Res.drawable.calendar)
 
 val CheckIcon: ImageVector
     @Composable
-    get() = ImageVector.vectorResource(id = Res.drawable.check)
+    get() = vectorResource(resource = Res.drawable.check)
 
 val CrossIcon: ImageVector
     @Composable
-    get() = ImageVector.vectorResource(id = Res.drawable.cross)
+    get() = vectorResource(resource = Res.drawable.cross)
 
 val ExclamationMarkIcon: ImageVector
     @Composable
-    get() = ImageVector.vectorResource(id = Res.drawable.danger)
+    get() = vectorResource(resource = Res.drawable.danger)
 
 val EyeClosedIcon: ImageVector
     @Composable
-    get() = ImageVector.vectorResource(id = Res.drawable.eye_closed)
+    get() = vectorResource(resource = Res.drawable.eye_closed)
 
 val EyeOpenedIcon: ImageVector
     @Composable
-    get() = ImageVector.vectorResource(id = Res.drawable.eye_opened)
+    get() = vectorResource(resource = Res.drawable.eye_opened)
 
 val FinishIcon: ImageVector
     @Composable
-    get() = ImageVector.vectorResource(id = Res.drawable.finish)
+    get() = vectorResource(resource = Res.drawable.finish)
 
 val KeyboardArrowDownIcon: ImageVector
     @Composable
-    get() = ImageVector.vectorResource(id = Res.drawable.keyboard_arrow_down)
+    get() = vectorResource(resource = Res.drawable.keyboard_arrow_down)
 
 val KeyboardArrowUpIcon: ImageVector
     @Composable
-    get() = ImageVector.vectorResource(id = Res.drawable.keyboard_arrow_up)
+    get() = vectorResource(resource = Res.drawable.keyboard_arrow_up)
 
 val LocationIcon: ImageVector
     @Composable
-    get() = ImageVector.vectorResource(id = Res.drawable.location)
+    get() = vectorResource(resource = Res.drawable.location)
 
 val LockIcon: ImageVector
     @Composable
-    get() = ImageVector.vectorResource(id = Res.drawable.lock)
+    get() = vectorResource(resource = Res.drawable.lock)
 
 val LogoIcon: ImageVector
     @Composable
-    get() = ImageVector.vectorResource(id = Res.drawable.logo)
+    get() = vectorResource(resource = Res.drawable.logo)
 
 val LogoutIcon: ImageVector
     @Composable
-    get() = ImageVector.vectorResource(id = Res.drawable.logout)
+    get() = vectorResource(resource = Res.drawable.logout)
 
 val PauseIcon: ImageVector
     @Composable
-    get() = ImageVector.vectorResource(id = Res.drawable.pause)
+    get() = vectorResource(resource = Res.drawable.pause)
 
 val PersonIcon: ImageVector
     @Composable
-    get() = ImageVector.vectorResource(id = Res.drawable.person)
+    get() = vectorResource(resource = Res.drawable.person)
 
 val RunOutlinedIcon: ImageVector
     @Composable
-    get() = ImageVector.vectorResource(id = Res.drawable.run_outlined)
+    get() = vectorResource(resource = Res.drawable.run_outlined)
 
 val RunIcon: ImageVector
     @Composable
-    get() = ImageVector.vectorResource(id = Res.drawable.run)
+    get() = vectorResource(resource = Res.drawable.run)
 
 val StartIcon: ImageVector
     @Composable
-    get() = ImageVector.vectorResource(id = Res.drawable.start)
+    get() = vectorResource(resource = Res.drawable.start)
 
 val StopIcon: ImageVector
     @Composable
-    get() = ImageVector.vectorResource(id = Res.drawable.stop)*/
+    get() = vectorResource(resource = Res.drawable.stop)

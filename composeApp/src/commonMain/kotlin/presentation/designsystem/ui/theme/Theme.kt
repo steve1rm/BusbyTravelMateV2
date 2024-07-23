@@ -5,8 +5,6 @@ import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.darkColorScheme
 import androidx.compose.material3.lightColorScheme
 import androidx.compose.runtime.Composable
-import me.androidbox.designsystem.ui.theme.Typography
-
 
 val DarkColorScheme = darkColorScheme(
     primary = BusbyGreen,
@@ -66,7 +64,7 @@ fun BusbyTravelMateTheme(
 
     MaterialTheme(
         colorScheme = colorScheme,
-        typography = Typography,
+        typography = Typography(),
         content = content
     )
 }
