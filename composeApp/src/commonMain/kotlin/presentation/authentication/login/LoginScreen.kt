@@ -24,6 +24,8 @@ import androidx.compose.ui.text.buildAnnotatedString
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.input.KeyboardType
 import androidx.compose.ui.text.withStyle
+import androidx.compose.ui.unit.TextUnit
+import androidx.compose.ui.unit.TextUnitType
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import busbytravelmatev2.composeapp.generated.resources.Res
@@ -65,13 +67,16 @@ fun LoginScreen(
                 text = stringResource(resource = Res.string.login_welcome),
                 fontWeight = FontWeight.SemiBold,
                 style = MaterialTheme.typography.headlineMedium,
-                color = MaterialTheme.colorScheme.onSurfaceVariant
+                color = MaterialTheme.colorScheme.onSurfaceVariant,
+                fontFamily = Poppins()
             )
 
             Text(
                 text = stringResource(resource = Res.string.welcome_message),
                 fontSize = 12.sp,
-                color = MaterialTheme.colorScheme.onSurfaceVariant
+                color = MaterialTheme.colorScheme.onSurfaceVariant,
+                fontFamily = Poppins(),
+                lineHeight = TextUnit(14F, TextUnitType.Sp)
             )
 
             Spacer(modifier = Modifier.height(48.dp))

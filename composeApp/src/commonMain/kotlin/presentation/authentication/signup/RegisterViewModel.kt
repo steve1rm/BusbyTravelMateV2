@@ -17,6 +17,7 @@ import domain.authentication.usecases.LoginUserWithEmailAndPasswordUseCase
 import domain.utils.CheckResult
 import domain.utils.DataError
 import kotlinx.coroutines.channels.Channel
+import kotlinx.coroutines.flow.combine
 import kotlinx.coroutines.flow.launchIn
 import kotlinx.coroutines.flow.onEach
 import kotlinx.coroutines.flow.receiveAsFlow
@@ -36,29 +37,18 @@ class RegisterViewModel(
     val registrationEvent = eventChannel.receiveAsFlow()
 
     init {
-        registerState.email.textAsFlow()
-            .onEach { email ->
-                val isValidEmail = userEmailPasswordValidator.isValidEmail(email.toString())
-                val canRegister = isValidEmail && registerState.passwordValidationState.isValidPassword && !registerState.isRegistering
+        combine(registerState.email.textAsFlow(), registerState.password.textAsFlow()) { email, password ->
+            val isValidEmail = userEmailPasswordValidator.isValidEmail(email.toString())
+            val passwordValidationState = userEmailPasswordValidator.validatePassword(password.toString())
 
-                registerState = registerState.copy(
-                    isValidEmail = isValidEmail,
-                    canRegister = canRegister
-                )
-            }
-            .launchIn(viewModelScope)
+            val canRegister = isValidEmail && passwordValidationState.isValidPassword && !registerState.isRegistering
 
-        registerState.password.textAsFlow()
-            .onEach { password ->
-                val passwordValidationState = userEmailPasswordValidator.validatePassword(password.toString())
-                val canRegister = registerState.isValidEmail && passwordValidationState.isValidPassword && !registerState.isRegistering
-
-                registerState = registerState.copy(
-                    passwordValidationState = passwordValidationState,
-                    canRegister = canRegister
-                )
-            }
-            .launchIn(viewModelScope)
+            registerState = registerState.copy(
+                isValidEmail = isValidEmail,
+                passwordValidationState = passwordValidationState,
+                canRegister = canRegister
+            )
+        }.launchIn(viewModelScope)
     }
 
     fun onAction(registerAction: RegisterAction) {
