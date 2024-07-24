@@ -12,5 +12,6 @@ Search for hotels for your location and get the details of each hotel
 * [X] Kermit Logger
 * [X] Clean Architecture
 * [X] MVVM
-* [X] Voyager for navigation  
+* [X] Voyager for navigation
+* [X] Koin for dependency injection
 
