@@ -10,21 +10,23 @@ actual fun isBlurSupported(): Boolean {
 
 @Composable
 actual fun getScreenWidthDp(): Dp {
-    val screenWidthPx = js("window.innerWidth") as Int
+   /* val screenWidthPx = js("window.innerWidth") as Int
     val density = js("window.devicePixelRatio") as Float
     val screenWidthDp = screenWidthPx / density
 
-    return screenWidthDp.dp
+    return screenWidthDp.dp*/
+    TODO()
 }
 
 @Composable
 actual fun getScreenHeightDp(): Dp {
     // Using JavaScript interop to get the screen height
-    val screenHeightPx = js("window.innerHeight") as Int
+   /* val screenHeightPx = js("window.innerHeight") as Int
     val density = js("window.devicePixelRatio") as Float
     val screenHeightDp = screenHeightPx / density
 
-    return screenHeightDp.dp
+    return screenHeightDp.dp*/
+    TODO()
 }
 
 @Composable

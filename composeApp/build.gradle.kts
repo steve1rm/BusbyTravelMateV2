@@ -52,10 +52,15 @@ kotlin {
     
     sourceSets {
         val desktopMain by getting
-        
+
         androidMain.dependencies {
             implementation(compose.preview)
             implementation(libs.androidx.activity.compose)
+            implementation(libs.compose.ui.tooling)
+            implementation(libs.compose.ui.tooling.preview)
+            implementation(libs.koin.android)
+            implementation(libs.koin.androidx.compose)
+            implementation(libs.lifecycle.viewmodel)
         }
         commonMain.dependencies {
             implementation(compose.runtime)
@@ -67,9 +72,16 @@ kotlin {
             implementation(libs.voyager.screen.model)
             implementation(libs.voyager.navigator)
             implementation(libs.voyager.transitions)
+            api(libs.koin.core)
+            implementation(libs.koin.compose)
+            implementation(libs.koin.compose.viewmodel)
         }
         desktopMain.dependencies {
             implementation(compose.desktop.currentOs)
+            implementation(libs.lifecycle.viewmodel)
+        }
+        iosMain.dependencies {
+            implementation(libs.lifecycle.viewmodel)
         }
     }
 }
