@@ -12,7 +12,8 @@ import androidx.lifecycle.viewModelScope
 import busbytravelmatev2.composeapp.generated.resources.Res
 import busbytravelmatev2.composeapp.generated.resources.email_exists
 import domain.authentication.AuthenticationRepository
-import domain.authentication.Imp.UserDataValidatorImp
+import domain.authentication.UserEmailPasswordValidator
+import domain.authentication.usecases.LoginUserWithEmailAndPasswordUseCase
 import domain.utils.CheckResult
 import domain.utils.DataError
 import kotlinx.coroutines.channels.Channel
@@ -24,8 +25,8 @@ import presentation.utils.UiText
 
 
 class RegisterViewModel(
-    private val userDataValidator: UserDataValidatorImp,
-    private val authenticationRepository: AuthenticationRepository
+    private val userEmailPasswordValidator: UserEmailPasswordValidator,
+    private val loginUserWithEmailAndPasswordUseCase: LoginUserWithEmailAndPasswordUseCase
 ) : ViewModel() {
 
     var registerState by mutableStateOf(RegisterState())
@@ -37,7 +38,7 @@ class RegisterViewModel(
     init {
         registerState.email.textAsFlow()
             .onEach { email ->
-                val isValidEmail = userDataValidator.isValidEmail(email.toString())
+                val isValidEmail = userEmailPasswordValidator.isValidEmail(email.toString())
                 val canRegister = isValidEmail && registerState.passwordValidationState.isValidPassword && !registerState.isRegistering
 
                 registerState = registerState.copy(
@@ -49,7 +50,7 @@ class RegisterViewModel(
 
         registerState.password.textAsFlow()
             .onEach { password ->
-                val passwordValidationState = userDataValidator.validatePassword(password.toString())
+                val passwordValidationState = userEmailPasswordValidator.validatePassword(password.toString())
                 val canRegister = registerState.isValidEmail && passwordValidationState.isValidPassword && !registerState.isRegistering
 
                 registerState = registerState.copy(
@@ -81,7 +82,7 @@ class RegisterViewModel(
         viewModelScope.launch {
             registerState = registerState.copy(isRegistering = true)
 
-            val result = authenticationRepository.register(
+            val result = loginUserWithEmailAndPasswordUseCase.execute(
                 registerState.email.text.toString().trim(),
                 registerState.password.text.toString()
             )

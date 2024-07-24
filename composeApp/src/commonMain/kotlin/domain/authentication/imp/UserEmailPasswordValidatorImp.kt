@@ -1,12 +1,12 @@
-package domain.authentication.Imp
+package domain.authentication.imp
 
 import domain.authentication.PasswordValidationState
 import domain.authentication.PatternValidator
-import domain.authentication.UserDataValidator
+import domain.authentication.UserEmailPasswordValidator
 
-class UserDataValidatorImp(
+class UserEmailPasswordValidatorImp(
     private val patternValidator: PatternValidator
-) : UserDataValidator {
+) : UserEmailPasswordValidator {
 
     companion object {
         const val MIN_PASSWORD_LENGTH = 9

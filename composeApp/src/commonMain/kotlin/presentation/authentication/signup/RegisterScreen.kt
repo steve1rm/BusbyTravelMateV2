@@ -36,7 +36,7 @@ import busbytravelmatev2.composeapp.generated.resources.password
 import busbytravelmatev2.composeapp.generated.resources.password_length
 import busbytravelmatev2.composeapp.generated.resources.register
 import busbytravelmatev2.composeapp.generated.resources.upper_case_character
-import domain.authentication.Imp.UserDataValidatorImp
+import domain.authentication.imp.UserEmailPasswordValidatorImp
 import domain.authentication.PasswordValidationState
 import org.jetbrains.compose.resources.stringResource
 import org.jetbrains.compose.ui.tooling.preview.Preview
@@ -110,7 +110,7 @@ fun RegisterScreen(
 
                 PasswordRequirement(
                     isValid = registerState.passwordValidationState.hasMinLength,
-                    text = stringResource(resource = Res.string.password_length, UserDataValidatorImp.MIN_PASSWORD_LENGTH),
+                    text = stringResource(resource = Res.string.password_length, UserEmailPasswordValidatorImp.MIN_PASSWORD_LENGTH),
                     modifier = Modifier.fillMaxWidth()
                 )
 

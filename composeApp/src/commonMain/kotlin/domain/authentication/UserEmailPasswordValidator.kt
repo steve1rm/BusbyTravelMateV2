@@ -1,6 +1,6 @@
 package domain.authentication
 
-interface UserDataValidator {
+interface UserEmailPasswordValidator {
 
     fun isValidEmail(email: String): Boolean
 

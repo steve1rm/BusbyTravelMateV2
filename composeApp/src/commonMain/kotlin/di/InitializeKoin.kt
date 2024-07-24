@@ -1,5 +1,7 @@
 package di
 
+import data.di.dataModule
+import domain.di.domainModule
 import org.koin.core.context.startKoin
 import org.koin.dsl.KoinAppDeclaration
 import presentation.di.presentationModule
@@ -11,7 +13,9 @@ fun initializeKoin(koinConfig: KoinAppDeclaration? = null) {
 
         this.modules(
             appModule,
-            presentationModule
+            presentationModule,
+            domainModule,
+            dataModule
         )
     }
 }
