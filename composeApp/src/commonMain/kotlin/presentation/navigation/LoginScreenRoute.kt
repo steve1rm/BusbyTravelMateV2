@@ -9,7 +9,6 @@ import co.touchlab.kermit.Logger
 import org.koin.compose.viewmodel.koinViewModel
 import presentation.authentication.login.LoginEvent
 import presentation.authentication.login.LoginScreen
-import presentation.authentication.login.LoginState
 import presentation.authentication.login.LoginViewModel
 import presentation.utils.ObserveAsEvents
 
@@ -18,10 +17,13 @@ data object LoginScreenRoute : Screen {
     @Composable
     override fun Content() {
         val loginViewModel = koinViewModel<LoginViewModel>()
+        val loginState = loginViewModel.loginState
 
         LoginScreen(
-            loginState = LoginState(),
-            onLoginAction = {}
+            loginState = loginState,
+            onLoginAction = { loginAction ->
+                loginViewModel.onLoginAction(loginAction)
+            }
         )
 
         ObserveAsEvents(

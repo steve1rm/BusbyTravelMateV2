@@ -80,6 +80,7 @@ kotlin {
         desktopMain.dependencies {
             implementation(compose.desktop.currentOs)
             implementation(libs.lifecycle.viewmodel)
+            implementation("org.jetbrains.kotlinx:kotlinx-coroutines-swing:1.7.3")
         }
         iosMain.dependencies {
             implementation(libs.lifecycle.viewmodel)
