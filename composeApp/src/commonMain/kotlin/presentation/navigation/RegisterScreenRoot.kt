@@ -3,6 +3,7 @@ package presentation.navigation
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.platform.LocalSoftwareKeyboardController
 import cafe.adriel.voyager.core.screen.Screen
+import cafe.adriel.voyager.navigator.LocalNavigator
 import org.koin.compose.viewmodel.koinViewModel
 import presentation.authentication.signup.RegisterAction
 import presentation.authentication.signup.RegisterEvent
@@ -18,6 +19,21 @@ data object RegisterScreenRoot : Screen {
      //   val context = LocalContext.current
         val keyboardController = LocalSoftwareKeyboardController.current
         val registerViewModel = koinViewModel<RegisterViewModel>()
+        val navigator = LocalNavigator.current
+
+        RegisterScreen(
+            registerState = registerViewModel.registerState,
+            onAction = { registerAction ->
+                when(registerAction) {
+                    RegisterAction.OnLoginClicked -> {
+                        navigator?.push(item = LoginScreenRoute)
+                    }
+                    else -> {
+                        registerViewModel.onAction(registerAction)
+                    }
+                }
+            })
+
 
         ObserveAsEvents(flow = registerViewModel.registrationEvent) { registerEvent ->
             when(registerEvent) {
@@ -32,20 +48,6 @@ data object RegisterScreenRoot : Screen {
                 }
             }
         }
-
-
-        RegisterScreen(
-            registerState = registerViewModel.registerState,
-            onAction = { registerAction ->
-                when(registerAction) {
-                    RegisterAction.OnLoginClicked -> {
-                  //      onSignUpClicked()
-                    }
-                    else -> {
-                        registerViewModel.onAction(registerAction)
-                    }
-                }
-            })
     }
 
 }

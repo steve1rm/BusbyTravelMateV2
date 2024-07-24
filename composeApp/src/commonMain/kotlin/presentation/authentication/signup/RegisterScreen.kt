@@ -67,7 +67,10 @@ fun RegisterScreen(
             ) {
                 Text(
                     text = stringResource(resource = Res.string.create_account),
-                    style = MaterialTheme.typography.headlineMedium)
+                    style = MaterialTheme.typography.headlineMedium,
+                    fontWeight = FontWeight.SemiBold,
+                    color = MaterialTheme.colorScheme.onSurfaceVariant,
+                    fontFamily = Poppins())
 
                 val annotatedString = buildDescriptionAnnotatedString()
                 ClickableText(text = annotatedString) { offSet ->
@@ -142,7 +145,7 @@ fun RegisterScreen(
                 BusbyActionButton(
                     text = stringResource(resource = Res.string.register),
                     isLoading = registerState.isRegistering,
-                    isEnabled = registerState.canRegister || !registerState.isRegistering,
+                    isEnabled = registerState.canRegister,
                     modifier = Modifier.fillMaxWidth(),
                     onClicked = {
                         onAction(RegisterAction.OnRegisterClicked)
