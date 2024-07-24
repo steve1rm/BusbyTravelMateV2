@@ -10,4 +10,7 @@ Search for hotels for your location and get the details of each hotel
 * [X] Android
 * [X] Wasm (Web Assembly)
 * [X] Kermit Logger
+* [X] Clean Architecture
+* [X] MVVM
+* [X] Voyager for navigation  
 
