@@ -62,6 +62,7 @@ kotlin {
             implementation(libs.koin.androidx.compose)
             implementation(libs.lifecycle.viewmodel)
         }
+
         commonMain.dependencies {
             implementation(compose.runtime)
             implementation(compose.foundation)
@@ -75,13 +76,21 @@ kotlin {
             api(libs.koin.core)
             implementation(libs.koin.compose)
             implementation(libs.koin.compose.viewmodel)
+            implementation(libs.kermit)
+            implementation(libs.validator.email)
         }
+
         desktopMain.dependencies {
             implementation(compose.desktop.currentOs)
             implementation(libs.lifecycle.viewmodel)
+            implementation(libs.kotlinx.coroutines.swing)
         }
+
         iosMain.dependencies {
             implementation(libs.lifecycle.viewmodel)
+        }
+
+        wasmJsMain.dependencies {
         }
     }
 }
