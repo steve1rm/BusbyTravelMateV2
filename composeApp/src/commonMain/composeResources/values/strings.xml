@@ -23,7 +23,7 @@
     <string name="email_exists">User with that email already exists</string>
     <string name="registration_success">Registration successful you can login in now</string>
     <string name="login_welcome">Busby Travel Mate V2</string>
-    <string name="welcome_message">"Welcome, to Busby Travel Mate, we take care of all your traveling needs. Please enter your email and password to get started. "</string>
+    <string name="welcome_message">Welcome, to Busby Travel Mate, we take care of all your traveling needs. Please enter your email and password to get started</string>
     <string name="dont_have_account">Don't have an account!</string>
     <string name="incorrect_email_or_password">Incorrect email or password!</string>
     <string name="error_disk_full">Failed to save the item because your disk is full</string>
