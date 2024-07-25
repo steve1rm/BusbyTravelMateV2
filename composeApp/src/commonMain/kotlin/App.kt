@@ -4,14 +4,13 @@ import androidx.compose.runtime.remember
 import androidx.lifecycle.viewmodel.compose.viewModel
 import cafe.adriel.voyager.navigator.Navigator
 import co.touchlab.kermit.Logger
-import dev.icerock.moko.permissions.PermissionState
-import dev.icerock.moko.permissions.compose.BindEffect
-import dev.icerock.moko.permissions.compose.rememberPermissionsControllerFactory
 import org.jetbrains.compose.ui.tooling.preview.Preview
 import org.koin.compose.KoinContext
 import presentation.designsystem.ui.theme.DarkColorScheme
 import presentation.navigation.LoginScreenRoute
+import presentation.permissions.PermissionState
 import presentation.permissions.PermissionViewModel
+import presentation.permissions.PermissionsControllerFactory
 
 @Composable
 @Preview
@@ -20,49 +19,41 @@ fun App() {
         colorScheme = DarkColorScheme,
         typography = MaterialTheme.typography,
     ) {
-
-        val permissionFactory = rememberPermissionsControllerFactory()
-        val permissionsController = remember(permissionFactory) {
-            permissionFactory.createPermissionsController()
-        }
-
-        BindEffect(permissionsController)
+        val permissionsControllerFactory = remember { PermissionsControllerFactory() }
+        val permissionsController = permissionsControllerFactory.createPermissionsController()
 
         val permissionViewModel = viewModel {
             PermissionViewModel(permissionsController)
         }
 
-        when (permissionViewModel.permissionState) {
+        when(permissionViewModel.permissionState) {
             PermissionState.NotDetermined -> {
                 Logger.d {
                     "PermissionState.NotDetermined"
                 }
             }
-
-            PermissionState.NotGranted -> {
+            PermissionState.NotGranted-> {
                 Logger.d {
                     "PermissionState.NotGranted"
                 }
                 permissionViewModel.provideOrRequestNotificationPermission()
             }
-
             PermissionState.Granted -> {
                 Logger.d {
                     "PermissionState.Granted"
                 }
             }
-
             PermissionState.Denied -> {
                 Logger.d {
                     "PermissionState.Denied"
                 }
                 permissionViewModel.provideOrRequestNotificationPermission()
             }
-
             PermissionState.DeniedAlways -> {
                 Logger.d {
                     "PermissionState.DeniedAlways"
                 }
+
                 permissionsController.openAppSettings()
             }
         }

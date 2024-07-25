@@ -5,12 +5,6 @@ import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.setValue
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import dev.icerock.moko.permissions.DeniedAlwaysException
-import dev.icerock.moko.permissions.DeniedException
-import dev.icerock.moko.permissions.Permission
-import dev.icerock.moko.permissions.PermissionState
-import dev.icerock.moko.permissions.PermissionsController
-import dev.icerock.moko.permissions.RequestCanceledException
 import kotlinx.coroutines.launch
 
 class PermissionViewModel(private val permissionsController: PermissionsController) : ViewModel() {
@@ -29,14 +23,11 @@ class PermissionViewModel(private val permissionsController: PermissionsControll
             try {
                 permissionsController.providePermission(Permission.REMOTE_NOTIFICATION)
                 permissionState = PermissionState.Granted
-            }
-            catch(exception: DeniedAlwaysException) {
+            } catch (exception: DeniedAlwaysException) {
                 permissionState = PermissionState.DeniedAlways
-            }
-            catch(exception: DeniedException) {
+            } catch (exception: DeniedException) {
                 permissionState = PermissionState.Denied
-            }
-            catch(exception: RequestCanceledException) {
+            } catch (exception: RequestCanceledException) {
                 exception.printStackTrace()
             }
         }

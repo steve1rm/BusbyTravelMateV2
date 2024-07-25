@@ -82,8 +82,6 @@ kotlin {
             implementation(libs.kermit)
             implementation(libs.validator.email)
             implementation(libs.lifecycle.viewmodel.compose)
-            implementation(libs.moko.permissions)
-            implementation(libs.moko.permissions.compose)
         }
 
         desktopMain.dependencies {
