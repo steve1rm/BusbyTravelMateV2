@@ -1,6 +1,5 @@
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.runtime.Composable
-import androidx.compose.runtime.remember
 import androidx.lifecycle.viewmodel.compose.viewModel
 import cafe.adriel.voyager.navigator.Navigator
 import co.touchlab.kermit.Logger
@@ -19,47 +18,46 @@ fun App() {
         colorScheme = DarkColorScheme,
         typography = MaterialTheme.typography,
     ) {
-        val permissionsControllerFactory = remember { PermissionsControllerFactory() }
-        val permissionsController = permissionsControllerFactory.createPermissionsController()
-
-        val permissionViewModel = viewModel {
-            PermissionViewModel(permissionsController)
-        }
-
-        when(permissionViewModel.permissionState) {
-            PermissionState.NotDetermined -> {
-                Logger.d {
-                    "PermissionState.NotDetermined"
-                }
-            }
-            PermissionState.NotGranted-> {
-                Logger.d {
-                    "PermissionState.NotGranted"
-                }
-                permissionViewModel.provideOrRequestNotificationPermission()
-            }
-            PermissionState.Granted -> {
-                Logger.d {
-                    "PermissionState.Granted"
-                }
-            }
-            PermissionState.Denied -> {
-                Logger.d {
-                    "PermissionState.Denied"
-                }
-                permissionViewModel.provideOrRequestNotificationPermission()
-            }
-            PermissionState.DeniedAlways -> {
-                Logger.d {
-                    "PermissionState.DeniedAlways"
-                }
-
-                permissionsController.openAppSettings()
-            }
-        }
+        permissionNotificationHandler()
 
         KoinContext {
             Navigator(screen = LoginScreenRoute)
+        }
+    }
+}
+
+@Composable
+private fun permissionNotificationHandler() {
+    val permissionsControllerFactory = PermissionsControllerFactory()
+    val permissionsController = permissionsControllerFactory.createPermissionsController()
+
+    val permissionViewModel = viewModel {
+        PermissionViewModel(permissionsController)
+    }
+
+    when (permissionViewModel.permissionState) {
+        PermissionState.NotDetermined -> {
+            Logger.d { "PermissionState.NotDetermined" }
+        }
+
+        PermissionState.NotGranted -> {
+            Logger.d { "PermissionState.NotGranted" }
+            permissionViewModel.provideOrRequestNotificationPermission()
+        }
+
+        PermissionState.Granted -> {
+            Logger.d { "PermissionState.Granted" }
+        }
+
+        PermissionState.Denied -> {
+            Logger.d { "PermissionState.Denied" }
+            permissionViewModel.provideOrRequestNotificationPermission()
+        }
+
+        PermissionState.DeniedAlways -> {
+            Logger.d { "PermissionState.DeniedAlways" }
+
+            permissionsController.openAppSettings()
         }
     }
 }

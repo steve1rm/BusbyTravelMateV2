@@ -8,6 +8,4 @@ import presentation.authentication.signup.RegisterViewModel
 val presentationModule = module {
     viewModelOf(::LoginViewModel)
     viewModelOf(::RegisterViewModel)
-
-
 }
