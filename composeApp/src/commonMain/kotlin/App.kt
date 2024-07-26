@@ -1,5 +1,7 @@
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.runtime.Composable
+import androidx.datastore.core.DataStore
+import androidx.datastore.preferences.core.Preferences
 import androidx.lifecycle.viewmodel.compose.viewModel
 import cafe.adriel.voyager.navigator.Navigator
 import co.touchlab.kermit.Logger
@@ -13,12 +15,14 @@ import presentation.permissions.PermissionsControllerFactory
 
 @Composable
 @Preview
-fun App() {
+fun App(dataStorePreferences: DataStore<Preferences>) {
     MaterialTheme(
         colorScheme = DarkColorScheme,
         typography = MaterialTheme.typography,
     ) {
         permissionNotificationHandler()
+
+      //  dataStorePreferences.edit {  }
 
         KoinContext {
             Navigator(screen = LoginScreenRoute)
