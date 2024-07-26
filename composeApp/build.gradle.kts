@@ -60,7 +60,10 @@ kotlin {
             implementation(libs.compose.ui.tooling.preview)
             implementation(libs.koin.android)
             implementation(libs.koin.androidx.compose)
+            /** Adding it here as it doesn't work for wasm, wait for an updated version and add this to common  */
             implementation(libs.lifecycle.viewmodel)
+            implementation(libs.moko.permissions)
+            implementation(libs.moko.permissions.compose)
         }
 
         commonMain.dependencies {
@@ -78,16 +81,21 @@ kotlin {
             implementation(libs.koin.compose.viewmodel)
             implementation(libs.kermit)
             implementation(libs.validator.email)
+            implementation(libs.lifecycle.viewmodel.compose)
         }
 
         desktopMain.dependencies {
             implementation(compose.desktop.currentOs)
+            /** Adding it here as it doesn't work for wasm, wait for an updated version and add this to common  */
             implementation(libs.lifecycle.viewmodel)
             implementation(libs.kotlinx.coroutines.swing)
         }
 
         iosMain.dependencies {
+            /** Adding it here as it doesn't work for wasm, wait for an updated version and add this to common  */
             implementation(libs.lifecycle.viewmodel)
+            implementation(libs.moko.permissions)
+            implementation(libs.moko.permissions.compose)
         }
 
         wasmJsMain.dependencies {
@@ -131,6 +139,7 @@ android {
         debugImplementation(compose.uiTooling)
     }
 }
+
 dependencies {
     implementation(libs.androidx.material3.android)
     debugImplementation(compose.uiTooling)
