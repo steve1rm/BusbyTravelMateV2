@@ -1,6 +1,5 @@
 package domain.di
 
-import com.chrynan.validator.EmailValidator
 import domain.authentication.AuthenticationRepository
 import domain.authentication.PatternValidator
 import domain.authentication.UserEmailPasswordValidator
@@ -8,6 +7,7 @@ import domain.authentication.imp.EmailPatternValidatorImp
 import domain.authentication.imp.UserEmailPasswordValidatorImp
 import domain.authentication.usecases.LoginUserWithEmailAndPasswordUseCase
 import domain.authentication.usecases.imp.LoginUserWithEmailAndPasswordUseCaseImp
+import domain.utils.EmailValidator
 import org.koin.core.module.dsl.factoryOf
 import org.koin.dsl.module
 
