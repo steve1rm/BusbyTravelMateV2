@@ -28,35 +28,8 @@ fun App() {
         colorScheme = DarkColorScheme,
         typography = MaterialTheme.typography,
     ) {
-     //   val scope = rememberCoroutineScope()
 
-    /*    dataStorePreferences
-            .data
-            .onEach {
-            val tokenKey = stringPreferencesKey("TOKEN")
-            Logger.setTag("BusbyTravelMate")
-            Logger.d(message = { "This has been inserted on LaunchIn [ ${it[tokenKey]} ]" })
-        }.launchIn(scope)
-
-        val token by dataStorePreferences.data
-            .onEach { preference ->
-                val tokenKey = stringPreferencesKey("TOKEN")
-                Logger.setTag("BusbyTravelMate")
-                Logger.d(message = { "This has been inserted collectAsState [ ${preference[tokenKey]} ]" })
-                preference[tokenKey]
-            }
-            .collectAsState("")*/
-
-     //   permissionNotificationHandler()
-/*
-
-        scope.launch {
-            dataStorePreferences.edit { preference ->
-                val tokenKey = stringPreferencesKey("TOKEN")
-                preference[tokenKey] = "steve"
-            }
-        }
-*/
+        permissionNotificationHandler()
 
         KoinContext {
             Navigator(screen = LoginScreenRoute)
