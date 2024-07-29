@@ -10,9 +10,7 @@ import androidx.datastore.preferences.core.stringPreferencesKey
 import androidx.lifecycle.viewmodel.compose.viewModel
 import cafe.adriel.voyager.navigator.Navigator
 import co.touchlab.kermit.Logger
-import co.touchlab.kermit.Logger.Companion
 import kotlinx.coroutines.flow.launchIn
-import kotlinx.coroutines.flow.map
 import kotlinx.coroutines.flow.onEach
 import kotlinx.coroutines.launch
 import org.jetbrains.compose.ui.tooling.preview.Preview
@@ -30,26 +28,27 @@ fun App(dataStorePreferences: DataStore<Preferences>) {
         colorScheme = DarkColorScheme,
         typography = MaterialTheme.typography,
     ) {
-        val scope = rememberCoroutineScope()
+     //   val scope = rememberCoroutineScope()
 
-        dataStorePreferences
+    /*    dataStorePreferences
             .data
             .onEach {
             val tokenKey = stringPreferencesKey("TOKEN")
             Logger.setTag("BusbyTravelMate")
-            Logger.d(message = { "This has been inserted on LaunchIn [ ${it[tokenKey]} ]" },)
+            Logger.d(message = { "This has been inserted on LaunchIn [ ${it[tokenKey]} ]" })
         }.launchIn(scope)
 
         val token by dataStorePreferences.data
             .onEach { preference ->
                 val tokenKey = stringPreferencesKey("TOKEN")
                 Logger.setTag("BusbyTravelMate")
-                Logger.d(message = { "This has been inserted collectAsState [ ${preference[tokenKey]} ]" },)
+                Logger.d(message = { "This has been inserted collectAsState [ ${preference[tokenKey]} ]" })
                 preference[tokenKey]
             }
-            .collectAsState("")
+            .collectAsState("")*/
 
-        permissionNotificationHandler()
+     //   permissionNotificationHandler()
+/*
 
         scope.launch {
             dataStorePreferences.edit { preference ->
@@ -57,6 +56,7 @@ fun App(dataStorePreferences: DataStore<Preferences>) {
                 preference[tokenKey] = "steve"
             }
         }
+*/
 
         KoinContext {
             Navigator(screen = LoginScreenRoute)

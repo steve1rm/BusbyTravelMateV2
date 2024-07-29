@@ -1,8 +1,10 @@
 import androidx.compose.ui.window.Window
 import androidx.compose.ui.window.application
-import data.DATA_STORE_FILE_NAME
 import data.createDataStore
+import data.preference.CreateDateStorePath
 import di.initializeKoin
+import domain.preferences.PreferenceRepository.Companion.DATA_STORE_FILE_NAME
+import org.koin.dsl.module
 
 fun main() {
     val localDataStorePreferences = createDataStore {
@@ -15,11 +17,19 @@ fun main() {
             title = "BusbyTravelMateV2",
         ) {
 
-            initializeKoin()
+            CreateDateStorePath().path
 
-            App(
-                dataStorePreferences = localDataStorePreferences
-            )
+            initializeKoin {
+                modules(
+                    module {
+                        single { CreateDateStorePath()}
+                    }
+                )
+            }
         }
+
+        App(
+            dataStorePreferences = localDataStorePreferences
+        )
     }
 }

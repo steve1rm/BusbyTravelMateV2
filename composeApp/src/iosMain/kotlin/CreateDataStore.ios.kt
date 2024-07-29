@@ -1,6 +1,6 @@
 import androidx.datastore.core.DataStore
 import androidx.datastore.preferences.core.Preferences
-import data.DATA_STORE_FILE_NAME
+import domain.preferences.PreferenceRepository.Companion.DATA_STORE_FILE_NAME
 
 fun createDataStore(): DataStore<Preferences> {
     data.createDataStore {
