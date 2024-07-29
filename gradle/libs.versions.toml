@@ -23,6 +23,7 @@ lifecycleViewModel = "2.8.4"
 lifecycleViewModelCompose = "2.8.0"
 kermit = "2.0.4"
 moko = "0.18.0"
+datastore = "1.1.1"
 
 [libraries]
 kotlin-test = { module = "org.jetbrains.kotlin:kotlin-test", version.ref = "kotlin" }
@@ -47,6 +48,10 @@ validator-email = { module = "com.chrynan.validator:validator-email", version.re
 # Pemissions
 moko-permissions = { module = "dev.icerock.moko:permissions", version.ref = "moko" }
 moko-permissions-compose = { module = "dev.icerock.moko:permissions-compose", version.ref = "moko" }
+
+# Data storage
+datastore = { module = "androidx.datastore:datastore", version.ref = "datastore" }
+datastore-preferences = { module = "androidx.datastore:datastore-preferences", version.ref = "datastore" }
 
 # Dependency injection
 koin-android = { module = "io.insert-koin:koin-android", version.ref = "koin" }
