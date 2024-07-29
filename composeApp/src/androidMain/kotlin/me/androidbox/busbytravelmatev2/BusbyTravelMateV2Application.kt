@@ -1,10 +1,9 @@
 package me.androidbox.busbytravelmatev2
 
 import android.app.Application
-import data.preference.CreateDateStorePath
 import di.initializeKoin
+import di.platformSpecific
 import org.koin.android.ext.koin.androidContext
-import org.koin.dsl.module
 
 class BusbyTravelMateV2Application : Application() {
 
@@ -14,9 +13,7 @@ class BusbyTravelMateV2Application : Application() {
         initializeKoin {
             androidContext(this@BusbyTravelMateV2Application)
             modules(
-                module {
-                    single { CreateDateStorePath(androidContext())}
-                }
+                platformSpecific
             )
         }
     }
