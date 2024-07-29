@@ -7,17 +7,11 @@ import domain.preferences.PreferenceRepository.Companion.DATA_STORE_FILE_NAME
 import org.koin.dsl.module
 
 fun main() {
-    val localDataStorePreferences = createDataStore {
-        DATA_STORE_FILE_NAME
-    }
-
     application {
         Window(
             onCloseRequest = ::exitApplication,
             title = "BusbyTravelMateV2",
         ) {
-
-            CreateDateStorePath().path
 
             initializeKoin {
                 modules(
@@ -26,10 +20,7 @@ fun main() {
                     }
                 )
             }
+            App()
         }
-
-        App(
-            dataStorePreferences = localDataStorePreferences
-        )
     }
 }

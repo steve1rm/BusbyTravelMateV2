@@ -23,7 +23,7 @@ import presentation.permissions.PermissionsControllerFactory
 
 @Composable
 @Preview
-fun App(dataStorePreferences: DataStore<Preferences>) {
+fun App() {
     MaterialTheme(
         colorScheme = DarkColorScheme,
         typography = MaterialTheme.typography,
