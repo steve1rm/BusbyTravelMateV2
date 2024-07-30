@@ -67,6 +67,7 @@ kotlin {
             implementation(libs.moko.permissions.compose)
             implementation(libs.datastore)
             implementation(libs.datastore.preferences)
+            implementation(libs.ktor.serialization.kotlinx.json)
         }
 
         commonMain.dependencies {
@@ -105,6 +106,7 @@ kotlin {
             implementation(libs.moko.permissions.compose)
             implementation(libs.datastore)
             implementation(libs.datastore.preferences)
+            implementation(libs.ktor.client.darwin)
         }
 
         wasmJsMain.dependencies {

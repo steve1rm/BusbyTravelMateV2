@@ -1,6 +1,5 @@
 package data.authentication.dto
 
-
 data class AuthenticationInfoDto(
     val email: String = "",
     val expiresIn: String = "",
