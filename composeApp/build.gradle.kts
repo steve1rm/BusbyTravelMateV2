@@ -10,6 +10,7 @@ plugins {
     alias(libs.plugins.jetbrainsCompose)
     alias(libs.plugins.compose.compiler)
     alias(libs.plugins.gmazzo.buildconfig)
+    alias(libs.plugins.kotlinxSerialization)
 }
 
 kotlin {
@@ -64,6 +65,8 @@ kotlin {
             implementation(libs.lifecycle.viewmodel)
             implementation(libs.moko.permissions)
             implementation(libs.moko.permissions.compose)
+            implementation(libs.datastore)
+            implementation(libs.datastore.preferences)
         }
 
         commonMain.dependencies {
@@ -81,8 +84,9 @@ kotlin {
             implementation(libs.koin.compose.viewmodel)
             implementation(libs.kermit)
             implementation(libs.lifecycle.viewmodel.compose)
-            api(libs.datastore)
-            api(libs.datastore.preferences)
+            implementation(libs.datastore)
+            implementation(libs.datastore.preferences)
+
         }
 
         desktopMain.dependencies {
@@ -90,6 +94,8 @@ kotlin {
             /** Adding it here as it doesn't work for wasm, wait for an updated version and add this to common  */
             implementation(libs.lifecycle.viewmodel)
             implementation(libs.kotlinx.coroutines.swing)
+            implementation(libs.datastore)
+            implementation(libs.datastore.preferences)
         }
 
         iosMain.dependencies {
@@ -97,6 +103,8 @@ kotlin {
             implementation(libs.lifecycle.viewmodel)
             implementation(libs.moko.permissions)
             implementation(libs.moko.permissions.compose)
+            implementation(libs.datastore)
+            implementation(libs.datastore.preferences)
         }
 
         wasmJsMain.dependencies {
