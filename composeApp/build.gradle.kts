@@ -80,9 +80,8 @@ kotlin {
             implementation(libs.koin.compose)
             implementation(libs.koin.compose.viewmodel)
             implementation(libs.kermit)
+            implementation(libs.validator.email)
             implementation(libs.lifecycle.viewmodel.compose)
-            api(libs.datastore)
-            api(libs.datastore.preferences)
         }
 
         desktopMain.dependencies {
