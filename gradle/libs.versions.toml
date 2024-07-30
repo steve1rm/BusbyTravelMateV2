@@ -23,7 +23,6 @@ lifecycleViewModel = "2.8.4"
 lifecycleViewModelCompose = "2.8.0"
 kermit = "2.0.4"
 moko = "0.18.0"
-datastore = "1.1.1"
 ktor = "2.3.9"
 
 [libraries]
@@ -51,8 +50,6 @@ moko-permissions = { module = "dev.icerock.moko:permissions", version.ref = "mok
 moko-permissions-compose = { module = "dev.icerock.moko:permissions-compose", version.ref = "moko" }
 
 # Data storage
-datastore = { module = "androidx.datastore:datastore", version.ref = "datastore" }
-datastore-preferences = { module = "androidx.datastore:datastore-preferences", version.ref = "datastore" }
 
 # Ktor
 ktor-client-content-negotiation = { module = "io.ktor:ktor-client-content-negotiation", version.ref = "ktor" }

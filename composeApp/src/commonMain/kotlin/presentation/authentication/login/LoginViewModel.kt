@@ -9,11 +9,8 @@ import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.setValue
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import co.touchlab.kermit.Logger
 import domain.authentication.UserEmailPasswordValidator
 import domain.authentication.usecases.LoginUserWithEmailAndPasswordUseCase
-import domain.preferences.usecases.RetrievePreferenceUseCase
-import domain.preferences.usecases.SavePreferenceUseCase
 import domain.utils.CheckResult
 import domain.utils.DataError
 import kotlinx.coroutines.channels.Channel
@@ -24,9 +21,7 @@ import kotlinx.coroutines.launch
 
 class LoginViewModel(
     private val userEmailPasswordValidator: UserEmailPasswordValidator,
-    private val loginUserWithEmailAndPasswordUseCase: LoginUserWithEmailAndPasswordUseCase,
-    private val savePreferenceUseCase: SavePreferenceUseCase,
-    private val retrievePreferenceUseCase: RetrievePreferenceUseCase
+    private val loginUserWithEmailAndPasswordUseCase: LoginUserWithEmailAndPasswordUseCase
 ) : ViewModel() {
 
     var loginState by mutableStateOf(LoginState())
@@ -67,13 +62,9 @@ class LoginViewModel(
 
     private fun login() {
         viewModelScope.launch {
-            val value = retrievePreferenceUseCase.execute("ACCESS")
-            Logger.d { "The ACCESS [ ${value.orEmpty()} ]" }
-            savePreferenceUseCase.execute("ACCESS", "This is the token that is from data store")
-
             loginState = loginState.copy(isLoggingIn = true)
 
-         /*  val result = loginUserWithEmailAndPasswordUseCase.execute(
+           val result = loginUserWithEmailAndPasswordUseCase.execute(
                 email = loginState.email.text.toString().trim(),
                 password = loginState.password.text.toString()
             )
@@ -82,7 +73,7 @@ class LoginViewModel(
 
             when(result) {
                 is CheckResult.Failure -> {
-                    *//** Display toast message *//*
+                    /** Display toast message */
                     if(result.exceptionError == DataError.Network.UNAUTHORIZED) {
                         eventLoginChannel.send(LoginEvent.OnLoginFailure(result.exceptionError.toString()))
                     }
@@ -91,10 +82,10 @@ class LoginViewModel(
                     }
                 }
                 is CheckResult.Success -> {
-                    *//** Go to home page *//*
+                    /** Go to home page */
                     eventLoginChannel.send(LoginEvent.OnLoginSuccess)
                 }
-            }*/
+            }
         }
     }
 }

@@ -18,7 +18,6 @@ fun App() {
         colorScheme = DarkColorScheme,
         typography = MaterialTheme.typography,
     ) {
-
         permissionNotificationHandler()
 
         KoinContext {
