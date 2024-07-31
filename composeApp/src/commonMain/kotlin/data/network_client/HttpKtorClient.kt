@@ -35,6 +35,7 @@ class HttpKtorClient(private val httpClientEngine: HttpClientEngine) {
                     }
                 }
                 this.level = LogLevel.ALL
+
            /*     if (BuildConfig.DEBUG) {
                     this.level = LogLevel.ALL
                 } else {

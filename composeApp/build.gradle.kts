@@ -3,6 +3,7 @@ import org.jetbrains.kotlin.gradle.ExperimentalKotlinGradlePluginApi
 import org.jetbrains.kotlin.gradle.dsl.JvmTarget
 import org.jetbrains.kotlin.gradle.targets.js.dsl.ExperimentalWasmDsl
 import org.jetbrains.kotlin.gradle.targets.js.webpack.KotlinWebpackConfig
+import org.jetbrains.kotlin.konan.properties.Properties
 
 plugins {
     alias(libs.plugins.kotlinMultiplatform)
@@ -107,6 +108,14 @@ kotlin {
             implementation(libs.ktor.engine.js)
         }
     }
+}
+
+buildConfig {
+    /** Retrieves API from the local properties */
+    val properties = Properties()
+    properties.load(project.rootProject.file("local.properties"))
+
+    buildConfigField("String", "FIREBASE_AUTHENTICATION_API_KEY", properties.getProperty("FIREBASE_AUTHENTICATION_API_KEY"))
 }
 
 android {
