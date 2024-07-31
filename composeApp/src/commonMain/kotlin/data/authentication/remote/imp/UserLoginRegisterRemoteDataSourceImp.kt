@@ -1,39 +1,50 @@
-package data.remote.imp
+package data.authentication.remote.imp
 
-import co.touchlab.kermit.Logger
-import data.remote.UserLoginRegisterRemoteDataSource
+import data.authentication.dto.AuthenticationInfoDto
+import data.authentication.remote.UserLoginRegisterRemoteDataSource
+import data.dto.ErrorResponseDto
+import data.utils.safeApiRequest
 import domain.authentication.models.RegisterUserModel
 import domain.utils.CheckResult
 import domain.utils.DataError
-import kotlinx.coroutines.delay
-import kotlin.coroutines.resume
-import kotlin.coroutines.suspendCoroutine
+import io.ktor.client.HttpClient
+import io.ktor.client.request.headers
+import io.ktor.client.request.post
+import io.ktor.client.request.setBody
+import io.ktor.client.utils.EmptyContent.headers
+import kotlinx.serialization.json.buildJsonObject
+import kotlinx.serialization.json.put
+import kotlin.text.append
 
-class UserLoginRegisterRemoteDataSourceImp() :
+class UserLoginRegisterRemoteDataSourceImp(private val httpClient: HttpClient) :
     UserLoginRegisterRemoteDataSource {
 
-    override suspend fun registerUser(registerUserModel: RegisterUserModel): CheckResult<String, DataError.Network, String> {
-       /* firebaseAuth.currentUser?.let {
-            Logger.d {
-                "User is already registered ${firebaseAuth.currentUser?.uid}"
-            }
-            return CheckResult.Success(it.uid)
+    override suspend fun registerUser(registerUserModel: RegisterUserModel): CheckResult<AuthenticationInfoDto, DataError.Network, ErrorResponseDto> {
+
+        val requestBody = buildJsonObject {
+            this.put("email", "far@mail.com")
+            this.put("password", "Test12345")
+            this.put("returnSecureToken", true)
         }
 
-        return suspendCoroutine { continuation ->
-            firebaseAuth.createUserWithEmailAndPassword(email, password)
-                .addOnCompleteListener { task ->
-                    if (task.isSuccessful) {
-                        Logger.d("User has been created ${firebaseAuth.currentUser?.uid}")
-                        continuation.resume(CheckResult.Success(firebaseAuth.currentUser?.uid ?: ""))
+        val safeResult = safeApiRequest<AuthenticationInfoDto> {
+            val response = httpClient
+                .post("https://identitytoolkit.googleapis.com/v1/accounts:signUp") {
+                    this.setBody(
+                        requestBody
+                    )
+                    this.url {
+                        this.parameters.append("key", "AIzaSyCn7yR54vYpXVRoisRIwIoVlvjwoACBPiM")
                     }
-                    else {
-                        Logger.d("Error when creating ${firebaseAuth.currentUser?.uid}")
-                        continuation.resume(CheckResult.Failure(exceptionError = DataError.Network.UNAUTHORIZED))
+
+                    this.headers {
+                        append("Content-Type", "application/json")
                     }
                 }
-        }*/
-        TODO()
+            response
+        }
+
+        return safeResult
     }
 
     override suspend fun loginUser(email: String, password: String): CheckResult<String, Unit, Unit> {

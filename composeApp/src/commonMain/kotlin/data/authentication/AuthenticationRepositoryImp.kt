@@ -1,6 +1,8 @@
 package data.authentication
 
-import data.remote.UserLoginRegisterRemoteDataSource
+import data.authentication.dto.AuthenticationInfoDto
+import data.authentication.remote.UserLoginRegisterRemoteDataSource
+import data.dto.ErrorResponseDto
 import domain.authentication.AuthenticationRepository
 import domain.authentication.models.RegisterUserModel
 import domain.utils.CheckResult
@@ -16,7 +18,7 @@ class AuthenticationRepositoryImp(
         TODO()
     }
 
-    override suspend fun registerUser(registerUserModel: RegisterUserModel): CheckResult<String, DataError.Network, String> {
+    override suspend fun registerUser(registerUserModel: RegisterUserModel): CheckResult<AuthenticationInfoDto, DataError.Network, ErrorResponseDto> {
       return userLoginRegisterRemoteDataSource.registerUser(registerUserModel)
     }
 

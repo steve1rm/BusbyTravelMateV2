@@ -87,7 +87,7 @@ class RegisterViewModel(
                         ))
                     }
                     else {
-                        eventChannel.send(RegisterEvent.RegistrationFailure(UiText.DynamicString(value = result.responseError ?: "")))
+                     //   eventChannel.send(RegisterEvent.RegistrationFailure(UiText.DynamicString(value = result.responseError ?: "")))
                     }
                 }
                 is CheckResult.Success -> {
