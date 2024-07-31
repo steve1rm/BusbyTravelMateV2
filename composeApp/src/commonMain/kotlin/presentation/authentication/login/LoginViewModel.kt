@@ -10,7 +10,8 @@ import androidx.compose.runtime.setValue
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import domain.authentication.UserEmailPasswordValidator
-import domain.authentication.usecases.LoginUserWithEmailAndPasswordUseCase
+import domain.authentication.models.RegisterUserModel
+import domain.authentication.usecases.RegisterUserUseCase
 import domain.utils.CheckResult
 import domain.utils.DataError
 import kotlinx.coroutines.channels.Channel
@@ -21,7 +22,7 @@ import kotlinx.coroutines.launch
 
 class LoginViewModel(
     private val userEmailPasswordValidator: UserEmailPasswordValidator,
-    private val loginUserWithEmailAndPasswordUseCase: LoginUserWithEmailAndPasswordUseCase
+    private val registerUserUseCase: RegisterUserUseCase
 ) : ViewModel() {
 
     var loginState by mutableStateOf(LoginState())
@@ -64,10 +65,10 @@ class LoginViewModel(
         viewModelScope.launch {
             loginState = loginState.copy(isLoggingIn = true)
 
-           val result = loginUserWithEmailAndPasswordUseCase.execute(
-                email = loginState.email.text.toString().trim(),
-                password = loginState.password.text.toString()
-            )
+            val result = registerUserUseCase.execute(
+                RegisterUserModel( email = loginState.email.text.toString().trim(),
+                    password = loginState.password.text.toString()
+                ))
 
             loginState = loginState.copy(isLoggingIn = false)
 

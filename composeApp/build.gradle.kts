@@ -65,7 +65,6 @@ kotlin {
             implementation(libs.lifecycle.viewmodel)
             implementation(libs.moko.permissions)
             implementation(libs.moko.permissions.compose)
-            implementation(libs.ktor.serialization.kotlinx.json)
         }
 
         commonMain.dependencies {
@@ -83,8 +82,8 @@ kotlin {
             implementation(libs.koin.compose.viewmodel)
             implementation(libs.kermit)
             implementation(libs.lifecycle.viewmodel.compose)
-            implementation(libs.datastore)
-            implementation(libs.datastore.preferences)
+            implementation(libs.kotlinx.serialization.json)
+            implementation(libs.bundles.ktor.common)
         }
 
         desktopMain.dependencies {
@@ -99,7 +98,6 @@ kotlin {
             implementation(libs.lifecycle.viewmodel)
             implementation(libs.moko.permissions)
             implementation(libs.moko.permissions.compose)
-            implementation(libs.ktor.client.darwin)
         }
 
         wasmJsMain.dependencies {

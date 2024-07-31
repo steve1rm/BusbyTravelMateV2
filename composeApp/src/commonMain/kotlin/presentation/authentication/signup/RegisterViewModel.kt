@@ -11,15 +11,14 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import busbytravelmatev2.composeapp.generated.resources.Res
 import busbytravelmatev2.composeapp.generated.resources.email_exists
-import domain.authentication.AuthenticationRepository
 import domain.authentication.UserEmailPasswordValidator
-import domain.authentication.usecases.LoginUserWithEmailAndPasswordUseCase
+import domain.authentication.models.RegisterUserModel
+import domain.authentication.usecases.RegisterUserUseCase
 import domain.utils.CheckResult
 import domain.utils.DataError
 import kotlinx.coroutines.channels.Channel
 import kotlinx.coroutines.flow.combine
 import kotlinx.coroutines.flow.launchIn
-import kotlinx.coroutines.flow.onEach
 import kotlinx.coroutines.flow.receiveAsFlow
 import kotlinx.coroutines.launch
 import presentation.utils.UiText
@@ -27,7 +26,7 @@ import presentation.utils.UiText
 
 class RegisterViewModel(
     private val userEmailPasswordValidator: UserEmailPasswordValidator,
-    private val loginUserWithEmailAndPasswordUseCase: LoginUserWithEmailAndPasswordUseCase
+    private val registerUserUseCase: RegisterUserUseCase
 ) : ViewModel() {
 
     var registerState by mutableStateOf(RegisterState())
@@ -72,10 +71,10 @@ class RegisterViewModel(
         viewModelScope.launch {
             registerState = registerState.copy(isRegistering = true)
 
-            val result = loginUserWithEmailAndPasswordUseCase.execute(
-                registerState.email.text.toString().trim(),
-                registerState.password.text.toString()
-            )
+            val result = registerUserUseCase.execute(
+                RegisterUserModel(email = registerState.email.text.toString().trim(),
+                password = registerState.password.text.toString()
+            ))
 
             registerState = registerState.copy(isRegistering = false)
 

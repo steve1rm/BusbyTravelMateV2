@@ -2,6 +2,7 @@ package data.remote.imp
 
 import co.touchlab.kermit.Logger
 import data.remote.UserLoginRegisterRemoteDataSource
+import domain.authentication.models.RegisterUserModel
 import domain.utils.CheckResult
 import domain.utils.DataError
 import kotlinx.coroutines.delay
@@ -11,7 +12,7 @@ import kotlin.coroutines.suspendCoroutine
 class UserLoginRegisterRemoteDataSourceImp() :
     UserLoginRegisterRemoteDataSource {
 
-    override suspend fun registerUser(email: String, password: String): CheckResult<String, Unit, Unit> {
+    override suspend fun registerUser(registerUserModel: RegisterUserModel): CheckResult<String, DataError.Network, String> {
        /* firebaseAuth.currentUser?.let {
             Logger.d {
                 "User is already registered ${firebaseAuth.currentUser?.uid}"

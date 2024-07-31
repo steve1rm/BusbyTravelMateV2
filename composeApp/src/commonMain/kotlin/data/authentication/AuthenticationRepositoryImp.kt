@@ -2,11 +2,12 @@ package data.authentication
 
 import data.remote.UserLoginRegisterRemoteDataSource
 import domain.authentication.AuthenticationRepository
+import domain.authentication.models.RegisterUserModel
 import domain.utils.CheckResult
 import domain.utils.DataError
 
 class AuthenticationRepositoryImp(
-   // private val userLoginRegisterRemoteDataSource: UserLoginRegisterRemoteDataSource
+   private val userLoginRegisterRemoteDataSource: UserLoginRegisterRemoteDataSource
 ) : AuthenticationRepository {
 
 
@@ -15,9 +16,8 @@ class AuthenticationRepositoryImp(
         TODO()
     }
 
-    override suspend fun registerUser(email: String, password: String): CheckResult<String, DataError.Network, String> {
-      //  return userLoginRegisterRemoteDataSource.registerUser(email, password)
-        TODO()
+    override suspend fun registerUser(registerUserModel: RegisterUserModel): CheckResult<String, DataError.Network, String> {
+      return userLoginRegisterRemoteDataSource.registerUser(registerUserModel)
     }
 
     override suspend fun logout(): CheckResult<Unit, Unit, Unit> {

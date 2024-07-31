@@ -5,8 +5,8 @@ import domain.authentication.PatternValidator
 import domain.authentication.UserEmailPasswordValidator
 import domain.authentication.imp.EmailPatternValidatorImp
 import domain.authentication.imp.UserEmailPasswordValidatorImp
-import domain.authentication.usecases.LoginUserWithEmailAndPasswordUseCase
-import domain.authentication.usecases.imp.LoginUserWithEmailAndPasswordUseCaseImp
+import domain.authentication.usecases.RegisterUserUseCase
+import domain.authentication.usecases.imp.RegisterUserUseCaseImp
 import domain.utils.EmailValidator
 import org.koin.core.module.dsl.factoryOf
 import org.koin.dsl.module
@@ -23,7 +23,7 @@ val domainModule = module {
         EmailPatternValidatorImp(get<EmailValidator>())
     }
 
-    factory<LoginUserWithEmailAndPasswordUseCase> {
-        LoginUserWithEmailAndPasswordUseCaseImp(get<AuthenticationRepository>())
+    factory<RegisterUserUseCase> {
+        RegisterUserUseCaseImp(get<AuthenticationRepository>())
     }
 }
