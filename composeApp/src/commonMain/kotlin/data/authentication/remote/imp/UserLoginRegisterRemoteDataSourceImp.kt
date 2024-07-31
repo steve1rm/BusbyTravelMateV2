@@ -3,6 +3,7 @@ package data.authentication.remote.imp
 import data.authentication.dto.AuthenticationInfoDto
 import data.authentication.remote.UserLoginRegisterRemoteDataSource
 import data.dto.ErrorResponseDto
+import data.utils.Routes
 import data.utils.safeApiRequest
 import domain.authentication.models.RegisterUserModel
 import domain.utils.CheckResult
@@ -17,7 +18,7 @@ class UserLoginRegisterRemoteDataSourceImp(private val httpClient: HttpClient) :
 
     override suspend fun registerUser(registerUserModel: RegisterUserModel): CheckResult<AuthenticationInfoDto, DataError.Network, ErrorResponseDto> {
 
-        /* Alternative way to send the request in the body
+        /** Alternative way to send the request in the body
          * Keeping it here for references purposes
         val requestBody = buildJsonObject {
             this.put("email", registerUserModel.email)
@@ -27,7 +28,7 @@ class UserLoginRegisterRemoteDataSourceImp(private val httpClient: HttpClient) :
 
         val safeResult = safeApiRequest<AuthenticationInfoDto> {
             val response = httpClient
-                .post("https://identitytoolkit.googleapis.com/v1/accounts:signUp") {
+                .post(Routes.SIGNUP) {
                     this.setBody(
                         registerUserModel
                     )
