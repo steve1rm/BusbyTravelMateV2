@@ -72,9 +72,10 @@ class RegisterViewModel(
             registerState = registerState.copy(isRegistering = true)
 
             val result = registerUserUseCase.execute(
-                RegisterUserModel(email = registerState.email.text.toString().trim(),
-                password = registerState.password.text.toString()
-            ))
+                RegisterUserModel(
+                    email = registerState.email.text.toString().trim(),
+                    password = registerState.password.text.toString()
+                ))
 
             registerState = registerState.copy(isRegistering = false)
 
@@ -87,7 +88,8 @@ class RegisterViewModel(
                         ))
                     }
                     else {
-                     //   eventChannel.send(RegisterEvent.RegistrationFailure(UiText.DynamicString(value = result.responseError ?: "")))
+                        eventChannel.send(RegisterEvent.RegistrationFailure(UiText.DynamicString(
+                            value = result.responseError?.error?.message.orEmpty())))
                     }
                 }
                 is CheckResult.Success -> {
