@@ -113,7 +113,7 @@ kotlin {
 buildConfig {
     /** Retrieves API from the local properties */
     val properties = Properties()
-    properties.load(project.rootProject.file("local.properties"))
+    properties.load(project.rootProject.file("local.properties").inputStream())
 
     buildConfigField("String", "FIREBASE_AUTHENTICATION_API_KEY", properties.getProperty("FIREBASE_AUTHENTICATION_API_KEY"))
 }

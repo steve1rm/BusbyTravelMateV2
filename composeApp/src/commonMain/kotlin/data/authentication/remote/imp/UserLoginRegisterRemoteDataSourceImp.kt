@@ -1,5 +1,6 @@
 package data.authentication.remote.imp
 
+import BusbyTravelMateV_.composeApp.BuildConfig
 import data.authentication.dto.AuthenticationInfoDto
 import data.authentication.remote.UserLoginRegisterRemoteDataSource
 import data.dto.ErrorResponseDto
@@ -33,7 +34,7 @@ class UserLoginRegisterRemoteDataSourceImp(private val httpClient: HttpClient) :
                         registerUserModel
                     )
                     this.url {
-                        this.parameters.append("key", "AIzaSyCn7yR54vYpXVRoisRIwIoVlvjwoACBPiM")
+                        this.parameters.append("key", BuildConfig.FIREBASE_AUTHENTICATION_API_KEY)
                     }
 
                     this.headers {
