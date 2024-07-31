@@ -11,27 +11,27 @@ import io.ktor.client.HttpClient
 import io.ktor.client.request.headers
 import io.ktor.client.request.post
 import io.ktor.client.request.setBody
-import io.ktor.client.utils.EmptyContent.headers
 import kotlinx.serialization.json.buildJsonObject
 import kotlinx.serialization.json.put
-import kotlin.text.append
 
 class UserLoginRegisterRemoteDataSourceImp(private val httpClient: HttpClient) :
     UserLoginRegisterRemoteDataSource {
 
     override suspend fun registerUser(registerUserModel: RegisterUserModel): CheckResult<AuthenticationInfoDto, DataError.Network, ErrorResponseDto> {
 
+        /* Alternative way to send the request in the body
+         * Keeping it here for references purposes
         val requestBody = buildJsonObject {
-            this.put("email", "far@mail.com")
-            this.put("password", "Test12345")
-            this.put("returnSecureToken", true)
-        }
+            this.put("email", registerUserModel.email)
+            this.put("password", registerUserModel.password)
+            this.put("returnSecureToken", registerUserModel.returnSecureToken)
+        } */
 
         val safeResult = safeApiRequest<AuthenticationInfoDto> {
             val response = httpClient
                 .post("https://identitytoolkit.googleapis.com/v1/accounts:signUp") {
                     this.setBody(
-                        requestBody
+                        registerUserModel
                     )
                     this.url {
                         this.parameters.append("key", "AIzaSyCn7yR54vYpXVRoisRIwIoVlvjwoACBPiM")
