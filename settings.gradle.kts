@@ -26,6 +26,7 @@ dependencyResolutionManagement {
         }
         mavenCentral()
         maven { url = uri("https://repo.repsy.io/mvn/chrynan/public") }
+        maven { url = uri("https://maven.pkg.jetbrains.space/kotlin/p/wasm/experimental") }
     }
 }
 

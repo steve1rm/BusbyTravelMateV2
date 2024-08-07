@@ -1,7 +1,9 @@
 import androidx.compose.ui.window.Window
 import androidx.compose.ui.window.application
-import data.preference.CreateDateStorePath
 import di.initializeKoin
+import io.ktor.client.HttpClient
+import io.ktor.client.engine.HttpClientEngine
+import io.ktor.client.engine.cio.CIO
 import org.koin.dsl.module
 
 fun main() {
@@ -14,10 +16,13 @@ fun main() {
             initializeKoin {
                 modules(
                     module {
-                        single { CreateDateStorePath()}
+                        single<HttpClientEngine> {
+                            HttpClient(CIO).engine
+                        }
                     }
                 )
             }
+
             App()
         }
     }

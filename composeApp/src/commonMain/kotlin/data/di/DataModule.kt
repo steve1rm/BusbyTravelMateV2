@@ -1,41 +1,25 @@
 package data.di
 
-import androidx.datastore.core.DataStore
-import androidx.datastore.preferences.core.PreferenceDataStoreFactory
-import androidx.datastore.preferences.core.Preferences
 import data.authentication.AuthenticationRepositoryImp
-import data.preference.CreateDateStorePath
-import data.preference.PreferenceRepositoryImp
-import data.preference.local.PreferenceLocalDataSource
-import data.preference.local.imp.PreferenceLocalDataSourceImp
+import data.network_client.HttpKtorClient
+import data.authentication.remote.UserLoginRegisterRemoteDataSource
+import data.authentication.remote.imp.UserLoginRegisterRemoteDataSourceImp
 import domain.authentication.AuthenticationRepository
-import domain.preferences.PreferenceRepository
-import okio.Path.Companion.toPath
+import io.ktor.client.HttpClient
+import io.ktor.client.engine.HttpClientEngine
 import org.koin.dsl.module
 
 val dataModule = module {
 
     factory<AuthenticationRepository> {
-        AuthenticationRepositoryImp()
+        AuthenticationRepositoryImp(get<UserLoginRegisterRemoteDataSource>())
     }
 
-    single {
-        val pathProvider = get<CreateDateStorePath>()
-
-        val path = pathProvider.path
-
-        PreferenceDataStoreFactory.createWithPath(
-            produceFile = {
-                path.toPath()
-            }
-        )
+    single<HttpClient> {
+        HttpKtorClient(get<HttpClientEngine>()).build()
     }
 
-    factory<PreferenceLocalDataSource> {
-        PreferenceLocalDataSourceImp(get<DataStore<Preferences>>())
-    }
-
-    factory<PreferenceRepository> {
-        PreferenceRepositoryImp(get<PreferenceLocalDataSource>())
+    factory<UserLoginRegisterRemoteDataSource> {
+        UserLoginRegisterRemoteDataSourceImp(get<HttpClient>())
     }
 }

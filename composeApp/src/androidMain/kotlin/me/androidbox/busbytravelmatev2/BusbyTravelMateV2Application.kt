@@ -2,8 +2,10 @@ package me.androidbox.busbytravelmatev2
 
 import android.app.Application
 import di.initializeKoin
-import di.platformSpecific
-import org.koin.android.ext.koin.androidContext
+import io.ktor.client.HttpClient
+import io.ktor.client.engine.HttpClientEngine
+import io.ktor.client.engine.cio.CIO
+import org.koin.dsl.module
 
 class BusbyTravelMateV2Application : Application() {
 
@@ -11,9 +13,12 @@ class BusbyTravelMateV2Application : Application() {
         super.onCreate()
 
         initializeKoin {
-            androidContext(this@BusbyTravelMateV2Application)
             modules(
-                platformSpecific
+                modules = module {
+                    single<HttpClientEngine> {
+                        HttpClient(CIO).engine
+                    }
+                }
             )
         }
     }

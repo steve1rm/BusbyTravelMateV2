@@ -3,6 +3,7 @@ import org.jetbrains.kotlin.gradle.ExperimentalKotlinGradlePluginApi
 import org.jetbrains.kotlin.gradle.dsl.JvmTarget
 import org.jetbrains.kotlin.gradle.targets.js.dsl.ExperimentalWasmDsl
 import org.jetbrains.kotlin.gradle.targets.js.webpack.KotlinWebpackConfig
+import org.jetbrains.kotlin.konan.properties.Properties
 
 plugins {
     alias(libs.plugins.kotlinMultiplatform)
@@ -10,6 +11,7 @@ plugins {
     alias(libs.plugins.jetbrainsCompose)
     alias(libs.plugins.compose.compiler)
     alias(libs.plugins.gmazzo.buildconfig)
+    alias(libs.plugins.kotlinxSerialization)
 }
 
 kotlin {
@@ -64,6 +66,7 @@ kotlin {
             implementation(libs.lifecycle.viewmodel)
             implementation(libs.moko.permissions)
             implementation(libs.moko.permissions.compose)
+            implementation(libs.ktor.engine.cio)
         }
 
         commonMain.dependencies {
@@ -81,8 +84,8 @@ kotlin {
             implementation(libs.koin.compose.viewmodel)
             implementation(libs.kermit)
             implementation(libs.lifecycle.viewmodel.compose)
-            api(libs.datastore)
-            api(libs.datastore.preferences)
+            implementation(libs.kotlinx.serialization.json)
+            implementation(libs.bundles.ktor.common)
         }
 
         desktopMain.dependencies {
@@ -90,6 +93,7 @@ kotlin {
             /** Adding it here as it doesn't work for wasm, wait for an updated version and add this to common  */
             implementation(libs.lifecycle.viewmodel)
             implementation(libs.kotlinx.coroutines.swing)
+            implementation(libs.ktor.engine.cio)
         }
 
         iosMain.dependencies {
@@ -97,11 +101,21 @@ kotlin {
             implementation(libs.lifecycle.viewmodel)
             implementation(libs.moko.permissions)
             implementation(libs.moko.permissions.compose)
+            implementation(libs.ktor.engine.cio)
         }
 
         wasmJsMain.dependencies {
+            implementation(libs.ktor.engine.js)
         }
     }
+}
+
+buildConfig {
+    /** Retrieves API from the local properties */
+    val properties = Properties()
+    properties.load(project.rootProject.file("local.properties").inputStream())
+
+    buildConfigField("String", "FIREBASE_AUTHENTICATION_API_KEY", properties.getProperty("FIREBASE_AUTHENTICATION_API_KEY"))
 }
 
 android {
@@ -135,6 +149,7 @@ android {
     }
     buildFeatures {
         compose = true
+        buildConfig = true
     }
     dependencies {
         debugImplementation(compose.uiTooling)
