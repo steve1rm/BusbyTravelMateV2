@@ -25,6 +25,7 @@ kermit = "2.0.4"
 moko = "0.18.0"
 ktor = "3.0.0-wasm2" # Only this version works for wasm
 multiplatformSettings = "1.1.1"
+securityCryptoVersion = "1.1.0-alpha06"
 
 [libraries]
 kotlin-test = { module = "org.jetbrains.kotlin:kotlin-test", version.ref = "kotlin" }
@@ -53,6 +54,7 @@ moko-permissions-compose = { module = "dev.icerock.moko:permissions-compose", ve
 # Data storage
 multiplatform-settings-no-arg = { module = "com.russhwolf:multiplatform-settings-no-arg", version.ref = "multiplatformSettings" }
 multiplatform-settings-coroutines = { module = "com.russhwolf:multiplatform-settings-coroutines", version.ref = "multiplatformSettings" }
+securityCrypto = { module = "androidx.security:security-crypto-ktx", version.ref = "securityCryptoVersion" }
 
 # Ktor
 ktor-engine-cio = { group = "io.ktor", name = "ktor-client-cio", version.ref = "ktor" }

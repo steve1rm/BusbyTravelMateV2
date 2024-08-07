@@ -69,6 +69,7 @@ kotlin {
             implementation(libs.ktor.engine.cio)
             implementation(libs.multiplatform.settings.coroutines)
             implementation(libs.multiplatform.settings.no.arg)
+            implementation(libs.securityCrypto)
         }
 
         commonMain.dependencies {
