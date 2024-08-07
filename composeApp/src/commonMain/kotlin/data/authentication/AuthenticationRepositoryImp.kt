@@ -5,6 +5,7 @@ import data.authentication.remote.UserLoginRegisterRemoteDataSource
 import data.dto.ErrorResponseDto
 import domain.authentication.AuthenticationRepository
 import domain.authentication.models.AuthenticationUserModel
+import domain.authentication.models.TokenAuthorizationModel
 import domain.utils.CheckResult
 import domain.utils.DataError
 
@@ -28,5 +29,13 @@ class AuthenticationRepositoryImp(
     override suspend fun isLoggedIn(): CheckResult<Boolean, Unit, Unit> {
       //  return userLoginRegisterRemoteDataSource.isLoggedIn()
         TODO()
+    }
+
+    override suspend fun fetchTokenAuthorization(): TokenAuthorizationModel? {
+        TODO("Not yet implemented")
+    }
+
+    override suspend fun setTokenAuthorization(tokenAuthorizationModel: TokenAuthorizationModel) {
+        TODO("Not yet implemented")
     }
 }
