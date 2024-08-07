@@ -6,7 +6,9 @@ import data.authentication.remote.UserLoginRegisterRemoteDataSource
 import data.dto.ErrorResponseDto
 import data.utils.Routes
 import data.utils.safeApiRequest
-import domain.authentication.models.RegisterUserModel
+import domain.authentication.models.AuthenticationUserModel
+import domain.authentication.models.LoginAuthenticationModel
+import domain.authentication.models.PostBody
 import domain.utils.CheckResult
 import domain.utils.DataError
 import io.ktor.client.HttpClient
@@ -17,26 +19,27 @@ import io.ktor.client.request.setBody
 class UserLoginRegisterRemoteDataSourceImp(private val httpClient: HttpClient) :
     UserLoginRegisterRemoteDataSource {
 
-    override suspend fun registerUser(registerUserModel: RegisterUserModel): CheckResult<AuthenticationInfoDto, DataError.Network, ErrorResponseDto> {
+    override suspend fun registerUser(authenticationUserModel: AuthenticationUserModel): CheckResult<AuthenticationInfoDto, DataError.Network, ErrorResponseDto> {
 
         /** Alternative way to send the request in the body
          * Keeping it here for references purposes
-        val requestBody = buildJsonObject {
-            this.put("email", registerUserModel.email)
-            this.put("password", registerUserModel.password)
-            this.put("returnSecureToken", registerUserModel.returnSecureToken)
-        } */
+         * val requestBody = buildJsonObject {
+         *    this.put("email", registerUserModel.email)
+         *    this.put("password", registerUserModel.password)
+         *    this.put("returnSecureToken", registerUserModel.returnSecureToken) }
+         */
 
         val safeResult = safeApiRequest<AuthenticationInfoDto> {
             val response = httpClient
-                .post(Routes.SIGNUP) {
+                .post(Routes.SIGN_UP) {
                     this.setBody(
-                        registerUserModel
+                        authenticationUserModel
                     )
                     this.url {
                         this.parameters.append("key", BuildConfig.FIREBASE_AUTHENTICATION_API_KEY)
                     }
 
+                    /** Remove this as after testing as we have added it to the HttpKtorClient */
                     this.headers {
                         append("Content-Type", "application/json")
                     }
@@ -47,32 +50,34 @@ class UserLoginRegisterRemoteDataSourceImp(private val httpClient: HttpClient) :
         return safeResult
     }
 
-    override suspend fun loginUser(email: String, password: String): CheckResult<String, Unit, Unit> {
-        /** Remove this, its just to add a small delay to simulate when a user logins */
-       /* delay(2_000)
+    override suspend fun loginUser(authenticationUserModel: AuthenticationUserModel): CheckResult<AuthenticationInfoDto, DataError.Network, ErrorResponseDto> {
+        val safeResult = safeApiRequest<AuthenticationInfoDto> {
+            val response = httpClient
+                .post(Routes.SIGN_IN_WITH_IDP) {
+                    this.setBody(
+                        LoginAuthenticationModel(
+                            postBody = PostBody(
+                                idToken = "",
+                                providerId = "google.com"
+                            ),
+                            requestUri = "http://localhost"
+                        )
+                    )
 
-        firebaseAuth.currentUser?.let {
-            Logger.d("User is already logged in ${firebaseAuth.currentUser?.uid}")
-            return CheckResult.Success(it.uid)
-        }
-
-        return suspendCoroutine { continuation ->
-            firebaseAuth.signInWithEmailAndPassword(email, password)
-                .addOnCompleteListener { task ->
-                    if (task.isSuccessful) {
-                        Logger.d("User has been logged in [$email, $password] ${firebaseAuth.currentUser?.uid}")
-                        continuation.resume(CheckResult.Success(firebaseAuth.currentUser?.uid ?: ""))
-                    }
-                    else {
-                        Logger.e("Error when logging in ${task.exception?.message}")
-                        continuation.resume(CheckResult.Failure(exceptionError = DataError.Network.UNAUTHORIZED))
+                    this.url {
+                        this.parameters.append("key", BuildConfig.FIREBASE_AUTHENTICATION_API_KEY)
                     }
                 }
-        }*/
-        TODO()
+            response
+        }
+
+        return safeResult
     }
 
-    override suspend fun logout(): CheckResult<Unit, Unit, Unit> {
+
+
+
+override suspend fun logout(): CheckResult<Unit, Unit, Unit> {
        /* if(firebaseAuth.currentUser == null) {
             return CheckResult.Success(Unit)
         }

@@ -12,7 +12,7 @@ import androidx.lifecycle.viewModelScope
 import busbytravelmatev2.composeapp.generated.resources.Res
 import busbytravelmatev2.composeapp.generated.resources.email_exists
 import domain.authentication.UserEmailPasswordValidator
-import domain.authentication.models.RegisterUserModel
+import domain.authentication.models.AuthenticationUserModel
 import domain.authentication.usecases.RegisterUserUseCase
 import domain.utils.CheckResult
 import domain.utils.DataError
@@ -72,7 +72,7 @@ class RegisterViewModel(
             registerState = registerState.copy(isRegistering = true)
 
             val result = registerUserUseCase.execute(
-                RegisterUserModel(
+                AuthenticationUserModel(
                     email = registerState.email.text.toString().trim(),
                     password = registerState.password.text.toString()
                 ))
