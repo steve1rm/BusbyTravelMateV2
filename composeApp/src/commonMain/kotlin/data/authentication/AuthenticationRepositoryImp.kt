@@ -1,6 +1,7 @@
 package data.authentication
 
 import data.authentication.dto.AuthenticationInfoDto
+import data.authentication.local.AuthorizationLocalDataSource
 import data.authentication.remote.UserLoginRegisterRemoteDataSource
 import data.dto.ErrorResponseDto
 import domain.authentication.AuthenticationRepository
@@ -10,10 +11,15 @@ import domain.utils.CheckResult
 import domain.utils.DataError
 
 class AuthenticationRepositoryImp(
-   private val userLoginRegisterRemoteDataSource: UserLoginRegisterRemoteDataSource
+    private val userLoginRegisterRemoteDataSource: UserLoginRegisterRemoteDataSource,
+    private val authorizationLocalDataSource: AuthorizationLocalDataSource
 ) : AuthenticationRepository {
 
     override suspend fun loginUser(authenticationUserModel: AuthenticationUserModel): CheckResult<AuthenticationInfoDto, DataError.Network, ErrorResponseDto> {
+        setTokenAuthorization(TokenAuthorizationModel(
+            tokenId = "this is the token id",
+            refreshToken = "this is the refresh token"
+        ))
         return userLoginRegisterRemoteDataSource.loginUser(authenticationUserModel)
     }
 
@@ -32,10 +38,10 @@ class AuthenticationRepositoryImp(
     }
 
     override suspend fun fetchTokenAuthorization(): TokenAuthorizationModel? {
-        TODO("Not yet implemented")
+        return authorizationLocalDataSource.get()
     }
 
     override suspend fun setTokenAuthorization(tokenAuthorizationModel: TokenAuthorizationModel) {
-        TODO("Not yet implemented")
+        authorizationLocalDataSource.set(tokenAuthorizationModel)
     }
 }

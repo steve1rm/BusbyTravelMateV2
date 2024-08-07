@@ -1,5 +1,8 @@
 package domain.authentication.models
 
+import kotlinx.serialization.Serializable
+
+@Serializable
 data class TokenAuthorizationModel(
     /** Short lived token */
     val tokenId: String,

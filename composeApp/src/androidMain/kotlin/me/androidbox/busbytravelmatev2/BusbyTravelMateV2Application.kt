@@ -15,17 +15,15 @@ class BusbyTravelMateV2Application : Application() {
     override fun onCreate() {
         super.onCreate()
 
-        initializeKoin {
+        initializeKoin({
             androidLogger()
             androidContext(this@BusbyTravelMateV2Application)
-            modules(
-                modules = module {
-                    single<HttpClientEngine> {
-                        HttpClient(CIO).engine
-                    }
-                    androidSpecificModule
+        },
+            androidSpecificModule,
+            module {
+                single<HttpClientEngine> {
+                    HttpClient(CIO).engine
                 }
-            )
-        }
+            })
     }
 }
