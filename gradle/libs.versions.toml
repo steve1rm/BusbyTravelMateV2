@@ -24,6 +24,7 @@ lifecycleViewModelCompose = "2.8.0"
 kermit = "2.0.4"
 moko = "0.18.0"
 ktor = "3.0.0-wasm2" # Only this version works for wasm
+multiplatformSettings = "1.1.1"
 
 [libraries]
 kotlin-test = { module = "org.jetbrains.kotlin:kotlin-test", version.ref = "kotlin" }
@@ -50,6 +51,8 @@ moko-permissions = { module = "dev.icerock.moko:permissions", version.ref = "mok
 moko-permissions-compose = { module = "dev.icerock.moko:permissions-compose", version.ref = "moko" }
 
 # Data storage
+multiplatform-settings-no-arg = { module = "com.russhwolf:multiplatform-settings-no-arg", version.ref = "multiplatformSettings" }
+multiplatform-settings-coroutines = { module = "com.russhwolf:multiplatform-settings-coroutines", version.ref = "multiplatformSettings" }
 
 # Ktor
 ktor-engine-cio = { group = "io.ktor", name = "ktor-client-cio", version.ref = "ktor" }

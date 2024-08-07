@@ -62,11 +62,13 @@ kotlin {
             implementation(libs.compose.ui.tooling.preview)
             implementation(libs.koin.android)
             implementation(libs.koin.androidx.compose)
-            /** Adding it here as it doesn't work for wasm, wait for an updated version and add this to common  */
+            /** TODO Adding it here as it doesn't work for wasm, wait for an updated version and add this to common  */
             implementation(libs.lifecycle.viewmodel)
             implementation(libs.moko.permissions)
             implementation(libs.moko.permissions.compose)
             implementation(libs.ktor.engine.cio)
+            implementation(libs.multiplatform.settings.coroutines)
+            implementation(libs.multiplatform.settings.no.arg)
         }
 
         commonMain.dependencies {
@@ -90,18 +92,20 @@ kotlin {
 
         desktopMain.dependencies {
             implementation(compose.desktop.currentOs)
-            /** Adding it here as it doesn't work for wasm, wait for an updated version and add this to common  */
+            /** TODO Adding it here as it doesn't work for wasm, wait for an updated version and add this to common  */
             implementation(libs.lifecycle.viewmodel)
             implementation(libs.kotlinx.coroutines.swing)
             implementation(libs.ktor.engine.cio)
         }
 
         iosMain.dependencies {
-            /** Adding it here as it doesn't work for wasm, wait for an updated version and add this to common  */
+            /** TODO Adding it here as it doesn't work for wasm, wait for an updated version and add this to common  */
             implementation(libs.lifecycle.viewmodel)
             implementation(libs.moko.permissions)
             implementation(libs.moko.permissions.compose)
             implementation(libs.ktor.engine.cio)
+            implementation(libs.multiplatform.settings.coroutines)
+            implementation(libs.multiplatform.settings.no.arg)
         }
 
         wasmJsMain.dependencies {
