@@ -17,7 +17,7 @@ val dataModule = module {
     }
 
     single<HttpClient> {
-        HttpKtorClient(get<HttpClientEngine>()).build()
+        HttpKtorClient(get<HttpClientEngine>(), get<AuthorizationLocalDataSource>()).build()
     }
 
     factory<UserLoginRegisterRemoteDataSource> {

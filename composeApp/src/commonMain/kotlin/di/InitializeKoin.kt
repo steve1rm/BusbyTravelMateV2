@@ -7,7 +7,7 @@ import org.koin.core.module.Module
 import org.koin.dsl.KoinAppDeclaration
 import presentation.di.presentationModule
 
-fun initializeKoin(koinConfig: KoinAppDeclaration? = null, vararg additionalModules: Module) {
+fun initializeKoin(koinConfig: KoinAppDeclaration? = null, vararg additionalModules: Module = emptyArray()) {
 
     startKoin {
         koinConfig?.invoke(this@startKoin)
