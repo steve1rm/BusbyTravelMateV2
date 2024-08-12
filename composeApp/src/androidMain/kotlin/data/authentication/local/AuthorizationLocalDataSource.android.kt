@@ -1,3 +1,5 @@
+@file:Suppress("EXPECT_ACTUAL_CLASSIFIERS_ARE_IN_BETA_WARNING")
+
 package data.authentication.local
 
 import com.russhwolf.settings.Settings
@@ -40,8 +42,8 @@ actual class AuthorizationLocalDataSource(private val settings: Settings) {
         }
         else {
             withContext(Dispatchers.IO) {
-                val tokens = Json.encodeToString(tokenAuthorizationModel)
-                settings[KEY_AUTH_TOKENS] = tokens
+                val tokenAuthorization = Json.encodeToString(tokenAuthorizationModel)
+                settings[KEY_AUTH_TOKENS] = tokenAuthorization
             }
         }
     }
