@@ -12,12 +12,12 @@ import domain.authentication.models.PostBody
 import domain.utils.CheckResult
 import domain.utils.DataError
 import io.ktor.client.HttpClient
-import io.ktor.client.request.headers
 import io.ktor.client.request.post
 import io.ktor.client.request.setBody
 
-class UserLoginRegisterRemoteDataSourceImp(private val httpClient: HttpClient) :
-    UserLoginRegisterRemoteDataSource {
+class UserLoginRegisterRemoteDataSourceImp(
+    private val httpClient: HttpClient)
+    : UserLoginRegisterRemoteDataSource {
 
     override suspend fun registerUser(authenticationUserModel: AuthenticationUserModel): CheckResult<AuthenticationInfoDto, DataError.Network, ErrorResponseDto> {
 
@@ -38,11 +38,6 @@ class UserLoginRegisterRemoteDataSourceImp(private val httpClient: HttpClient) :
                     this.url {
                         this.parameters.append("key", BuildConfig.FIREBASE_AUTHENTICATION_API_KEY)
                     }
-
-                    /** Remove this as after testing as we have added it to the HttpKtorClient */
-                    this.headers {
-                        append("Content-Type", "application/json")
-                    }
                 }
             response
         }
@@ -50,7 +45,7 @@ class UserLoginRegisterRemoteDataSourceImp(private val httpClient: HttpClient) :
         return safeResult
     }
 
-    override suspend fun loginUser(authenticationUserModel: AuthenticationUserModel): CheckResult<AuthenticationInfoDto, DataError.Network, ErrorResponseDto> {
+    override suspend fun loginUserWithIdpToken(authenticationUserModel: AuthenticationUserModel): CheckResult<AuthenticationInfoDto, DataError.Network, ErrorResponseDto> {
         val safeResult = safeApiRequest<AuthenticationInfoDto> {
             val response = httpClient
                 .post(Routes.SIGN_IN_WITH_IDP) {
@@ -74,10 +69,28 @@ class UserLoginRegisterRemoteDataSourceImp(private val httpClient: HttpClient) :
         return safeResult
     }
 
+    override suspend fun loginUserWithPassword(authenticationUserModel: AuthenticationUserModel): CheckResult<AuthenticationInfoDto, DataError.Network, ErrorResponseDto> {
+        val safeResult = safeApiRequest<AuthenticationInfoDto> {
+            val response = httpClient
+                .post(Routes.SIGN_IN_WITH_PASSWORD) {
+                    this.setBody(
+                        authenticationUserModel
+                    )
+
+                    this.url {
+                        this.parameters.append("key", BuildConfig.FIREBASE_AUTHENTICATION_API_KEY)
+                    }
+                }
+            response
+        }
+
+        return safeResult
+    }
 
 
 
-override suspend fun logout(): CheckResult<Unit, Unit, Unit> {
+
+    override suspend fun logout(): CheckResult<Unit, Unit, Unit> {
        /* if(firebaseAuth.currentUser == null) {
             return CheckResult.Success(Unit)
         }

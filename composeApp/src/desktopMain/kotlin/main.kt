@@ -13,7 +13,7 @@ fun main() {
             title = "BusbyTravelMateV2",
         ) {
 
-            initializeKoin {
+            initializeKoin( {
                 modules(
                     module {
                         single<HttpClientEngine> {
@@ -21,7 +21,7 @@ fun main() {
                         }
                     }
                 )
-            }
+            })
 
             App()
         }

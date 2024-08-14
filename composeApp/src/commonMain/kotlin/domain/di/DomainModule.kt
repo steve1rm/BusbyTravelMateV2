@@ -5,10 +5,16 @@ import domain.authentication.PatternValidator
 import domain.authentication.UserEmailPasswordValidator
 import domain.authentication.imp.EmailPatternValidatorImp
 import domain.authentication.imp.UserEmailPasswordValidatorImp
+import domain.authentication.usecases.GetTokenAuthorizationUseCase
 import domain.authentication.usecases.LoginUserUseCase
+import domain.authentication.usecases.LoginUserWithPasswordUseCase
 import domain.authentication.usecases.RegisterUserUseCase
+import domain.authentication.usecases.SetTokenAuthorizationUseCase
+import domain.authentication.usecases.imp.GetTokenAuthorizationUseCaseImp
 import domain.authentication.usecases.imp.LoginUserUseCaseImp
+import domain.authentication.usecases.imp.LoginUserWithPasswordUseCaseImp
 import domain.authentication.usecases.imp.RegisterUserUseCaseImp
+import domain.authentication.usecases.imp.SetTokenAuthorizationUseCaseImp
 import domain.utils.EmailValidator
 import org.koin.core.module.dsl.factoryOf
 import org.koin.dsl.module
@@ -31,5 +37,17 @@ val domainModule = module {
 
     factory<LoginUserUseCase> {
         LoginUserUseCaseImp(get<AuthenticationRepository>())
+    }
+
+    factory<LoginUserWithPasswordUseCase> {
+        LoginUserWithPasswordUseCaseImp(get<AuthenticationRepository>())
+    }
+
+    factory<SetTokenAuthorizationUseCase> {
+        SetTokenAuthorizationUseCaseImp(get<AuthenticationRepository>())
+    }
+
+    factory<GetTokenAuthorizationUseCase> {
+        GetTokenAuthorizationUseCaseImp(get<AuthenticationRepository>())
     }
 }
