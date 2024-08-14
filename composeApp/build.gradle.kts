@@ -158,6 +158,10 @@ android {
     }
     dependencies {
         debugImplementation(compose.uiTooling)
+        debugImplementation(compose.preview)
+        implementation(libs.androidx.material3.android)
+        debugImplementation(compose.uiTooling)
+        debugImplementation(libs.compose.ui.tooling.preview)
     }
 }
 
