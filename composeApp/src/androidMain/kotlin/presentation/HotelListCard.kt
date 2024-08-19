@@ -7,13 +7,23 @@ import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.ExperimentalLayoutApi
 import androidx.compose.foundation.layout.FlowRow
+import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.defaultMinSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.offset
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.shape.RoundedCornerShape
+import androidx.compose.material.icons.Icons
+import androidx.compose.material.icons.filled.AccountBox
+import androidx.compose.material.icons.filled.AccountCircle
+import androidx.compose.material.icons.filled.Favorite
+import androidx.compose.material.icons.filled.LocationOn
+import androidx.compose.material.icons.filled.Share
+import androidx.compose.material.icons.filled.Star
 import androidx.compose.material3.Card
 import androidx.compose.material3.CardDefaults
+import androidx.compose.material3.Icon
+import androidx.compose.material3.IconButton
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
@@ -59,47 +69,219 @@ fun HotelDetailCard(
     Column(
         modifier = Modifier.fillMaxWidth()
     ) {
+        FlowRow(
+            modifier = Modifier,
+            horizontalArrangement = Arrangement.spacedBy(8.dp),
+            verticalArrangement = Arrangement.spacedBy(4.dp)) {
+
+            Text(modifier = Modifier
+                .background(color = Color.Blue)
+                .padding(horizontal = 8.dp)
+                .defaultMinSize(minWidth = maxWidthDp)
+                .onSizeChanged { size ->
+                    maxWidth = max(maxWidth, size.width)
+                },
+                text = "Top Value", fontSize = 12.sp)
+
+            Text(
+                modifier = Modifier
+                    .background(color = Color.Blue)
+                    .padding(horizontal = 8.dp)
+                    .defaultMinSize(minWidth = maxWidthDp)
+                    .onSizeChanged { size ->
+                        maxWidth = max(maxWidth, size.width)
+                    },
+                text = "Highly Rated", fontSize = 12.sp)
+        }
+
+        HotelDetailHeader()
+
         FlowRow(modifier = Modifier,
             horizontalArrangement = Arrangement.spacedBy(8.dp),
             verticalArrangement = Arrangement.spacedBy(4.dp)) {
 
             Text(modifier = Modifier
+                .background(color = Color.Green)
+                .padding(horizontal = 8.dp)
                 .defaultMinSize(minWidth = maxWidthDp)
                 .onSizeChanged { size ->
                     maxWidth = max(maxWidth, size.width)
                 },
-                text = "Breakfast Included", fontSize = 12.sp)
+                text = "Breakfast", fontSize = 12.sp)
 
             Text(
                 modifier = Modifier
+                    .background(color = Color.Green)
+                    .padding(horizontal = 8.dp)
                     .defaultMinSize(minWidth = maxWidthDp)
                     .onSizeChanged { size ->
                         maxWidth = max(maxWidth, size.width)
                     },
-                text = "Free Cancellation", fontSize = 12.sp)
+                text = "Parking", fontSize = 12.sp)
 
             Text(
                 modifier = Modifier
+                    .background(color = Color.Green)
+                    .padding(horizontal = 8.dp)
                     .defaultMinSize(minWidth = maxWidthDp)
                     .onSizeChanged { size ->
                         maxWidth = max(maxWidth, size.width)
                     },
-                text = "Preferred Room", fontSize = 12.sp)
+                text = "Free Wifi", fontSize = 12.sp)
+
+            Text(
+                modifier = Modifier
+                    .background(color = Color.Green)
+                    .padding(horizontal = 8.dp)
+                    .defaultMinSize(minWidth = maxWidthDp)
+                    .onSizeChanged { size ->
+                        maxWidth = max(maxWidth, size.width)
+                    },
+                text = "Cancellation", fontSize = 12.sp)
+
+            Text(
+                modifier = Modifier
+                    .background(color = Color.Green)
+                    .padding(horizontal = 8.dp)
+                    .defaultMinSize(minWidth = maxWidthDp)
+                    .onSizeChanged { size ->
+                        maxWidth = max(maxWidth, size.width)
+                    },
+                text = "Preferred", fontSize = 12.sp)
+
             Text(modifier = Modifier
+                .background(color = Color.Green)
+                .padding(horizontal = 8.dp)
                 .defaultMinSize(minWidth = maxWidthDp)
                 .onSizeChanged { size ->
                     maxWidth = max(maxWidth, size.width)
                 },
-                text = "Exclusive Offers", fontSize = 12.sp)
+                text = "Exclusive", fontSize = 12.sp)
 
             Text(
                 modifier = Modifier
+                    .background(color = Color.Green)
+                    .padding(horizontal = 8.dp)
                     .defaultMinSize(minWidth = maxWidthDp)
                     .onSizeChanged { size ->
                         maxWidth = max(maxWidth, size.width)
                     },
-                text = "Discounts Demand", fontSize = 12.sp)
+                text = "Discounts", fontSize = 12.sp)
         }
+
+        Row(
+            modifier = Modifier.fillMaxWidth(),
+            verticalAlignment = Alignment.CenterVertically) {
+            Icon(
+                imageVector = Icons.Default.AccountCircle,
+                contentDescription = null,
+                tint = Color.LightGray
+            )
+
+            Text(
+                text = "Cashback rewards",
+                fontSize = 12.sp
+            )
+
+            Text(
+                text = "B 275.59 (Terms apply)",
+                fontSize = 12.sp
+            )
+
+            Text(
+                modifier = Modifier.fillMaxWidth(),
+                textAlign = TextAlign.End,
+                text = "B 1,781",
+                fontSize = 16.sp,
+                fontWeight = FontWeight.SemiBold
+            )
+        }
+
+        Row(modifier = Modifier.fillMaxWidth()) {
+            Icon(
+                imageVector = Icons.Default.AccountBox,
+                contentDescription = null,
+                tint = Color.LightGray
+            )
+
+            Text(
+                text = "AGODASPONSORED - B 171 off!",
+                fontSize = 12.sp
+            )
+        }
+    }
+}
+
+@Composable
+fun HotelDetailHeader() {
+
+    Row(
+        modifier = Modifier.fillMaxWidth(),
+        verticalAlignment = Alignment.CenterVertically
+    ) {
+        Column {
+            Text(
+                text = "Lloyd's Inn Bali"
+            )
+            Row(
+                modifier = Modifier.fillMaxWidth()
+            ) {
+                repeat(4) {
+                    Icon(
+                        imageVector = Icons.Default.Star,
+                        contentDescription = null,
+                        tint = Color.Yellow
+                    )
+                }
+
+                Icon(
+                    imageVector = Icons.Default.LocationOn,
+                    contentDescription = null,
+                    tint = Color.LightGray
+                )
+
+                Text(
+                    text = "Seminyak - City Center"
+                )
+            }
+        }
+
+        Row(
+            modifier = Modifier.fillMaxWidth(),
+            horizontalArrangement = Arrangement.End
+        ) {
+            IconButton(
+                onClick = {},
+                content = {
+                    Icon(
+                        imageVector = Icons.Default.Share,
+                        contentDescription = "Share this hotel"
+                    )
+                }
+            )
+
+            IconButton(
+                onClick = {},
+                content = {
+                    Icon(
+                        imageVector = Icons.Default.Favorite,
+                        contentDescription = "Share this hotel"
+                    )
+                }
+            )
+        }
+    }
+
+    Row(modifier = Modifier.fillMaxWidth()) {
+        Text(
+            text = "8.6 Excellent",
+            color = Color.Blue
+        )
+
+        Text(
+            text = "2,305 reviews",
+            color = Color.LightGray
+        )
     }
 }
 
@@ -175,7 +357,7 @@ fun HotelImageCard(
 @Composable
 fun PreviewImageCard() {
     BusbyTravelMateTheme {
-        HotelImageCard()
-      //  HotelDetailCard()
+    //    HotelImageCard()
+        HotelDetailCard()
     }
 }
