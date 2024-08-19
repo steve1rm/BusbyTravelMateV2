@@ -12,8 +12,9 @@ import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.offset
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.shape.RoundedCornerShape
+import androidx.compose.material3.Card
+import androidx.compose.material3.CardDefaults
 import androidx.compose.material3.Text
-import androidx.compose.material3.rememberTooltipState
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableIntStateOf
@@ -32,7 +33,6 @@ import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import me.androidbox.busbytravelmatev2.R
-import org.intellij.lang.annotations.JdkConstants.HorizontalAlignment
 import presentation.designsystem.ui.theme.BusbyTravelMateTheme
 import kotlin.math.max
 
@@ -107,9 +107,9 @@ fun HotelDetailCard(
 fun HotelImageCard(
     modifier: Modifier = Modifier
 ) {
-    Box(modifier = Modifier.fillMaxWidth().padding(bottom = 22.dp)) {
+    Box(modifier = Modifier.fillMaxWidth().padding(bottom = 44.dp)) {
         Box(
-            modifier = modifier.fillMaxWidth().clip(RoundedCornerShape(16.dp))
+            modifier = modifier.fillMaxWidth().clip(RoundedCornerShape(12.dp))
         ) {
             Image(
                 painter = painterResource(R.drawable.hotelimage2),
@@ -141,17 +141,16 @@ fun HotelImageCard(
             text = "Sponsored"
         )
 
-        Box(
+        Card(
             modifier = Modifier
                 .align(Alignment.BottomEnd)
-                .padding(end = 16.dp)
-
+                .offset(y = 20.dp)
+                .padding(end = 16.dp),
+            colors = CardDefaults.cardColors(containerColor = Color.White),
+            elevation = CardDefaults.cardElevation(defaultElevation = 8.dp)
         ) {
             Column(
                 modifier = Modifier
-                    .align(Alignment.BottomEnd)
-                    .offset(y = 20.dp)
-                    .background(color = Color.White, shape = RoundedCornerShape(8.dp))
                     .padding(top = 8.dp, end = 16.dp, bottom = 4.dp, start = 16.dp),
                 horizontalAlignment = Alignment.End
             ) {
@@ -172,11 +171,11 @@ fun HotelImageCard(
     }
 }
 
-@Preview(showBackground = false)
+@Preview(showBackground = true)
 @Composable
 fun PreviewImageCard() {
     BusbyTravelMateTheme {
-      //  HotelImageCard()
-        HotelDetailCard()
+        HotelImageCard()
+      //  HotelDetailCard()
     }
 }
