@@ -2,6 +2,7 @@ package presentation
 
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
+import androidx.compose.foundation.border
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
@@ -357,18 +358,20 @@ fun HotelImageCard(
                 }
 
             Box(
-                modifier = Modifier.offset(x = (-16).dp, y = (-16).dp),
+                modifier = Modifier.offset(x = (-12).dp, y = (-12).dp)
+                    .border(width = 0.5.dp, color = Color.White, shape = CircleShape),
             ) {
                 Box(
                     modifier = Modifier
-                        .size(32.dp)
-                        .background(color = Color.Red, shape = CircleShape),
+                        .size(24.dp)
+                        .clip(CircleShape)
+                        .background(color = Color.Red),
                     contentAlignment = Alignment.Center
                 ) {
                     Text(
                         color = Color.White,
                         text = "1",
-                        fontSize = 16.sp
+                        fontSize = 12.sp
                     )
                 }
             }
