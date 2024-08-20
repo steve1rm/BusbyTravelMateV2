@@ -61,7 +61,7 @@ import kotlin.math.max
 fun HotelListCard(
     modifier: Modifier = Modifier
 ) {
-    Column {
+    Column(modifier = modifier) {
         HotelImageCard()
         HotelDetailCard()
     }
@@ -81,7 +81,7 @@ fun HotelDetailCard(
     }
 
     Column(
-        modifier = Modifier.fillMaxWidth()
+        modifier = modifier.fillMaxWidth()
     ) {
         FlowRow(
             modifier = Modifier,
