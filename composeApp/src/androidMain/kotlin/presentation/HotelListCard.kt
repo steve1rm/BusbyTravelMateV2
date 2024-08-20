@@ -5,6 +5,7 @@ import androidx.compose.foundation.background
 import androidx.compose.foundation.border
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
+import androidx.compose.foundation.layout.BoxScope
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.ExperimentalLayoutApi
 import androidx.compose.foundation.layout.FlowRow
@@ -23,7 +24,6 @@ import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.AccountBox
 import androidx.compose.material.icons.filled.AccountCircle
 import androidx.compose.material.icons.filled.Favorite
-import androidx.compose.material.icons.filled.Info
 import androidx.compose.material.icons.filled.LocationOn
 import androidx.compose.material.icons.filled.Share
 import androidx.compose.material.icons.filled.ShoppingCart
@@ -342,45 +342,52 @@ fun HotelImageCard(
             text = "Sponsored"
         )
 
+        PriceCardDiscount()
+    }
+}
+
+@Composable
+fun BoxScope.PriceCardDiscount() {
+    Box(
+        modifier = Modifier
+            .offset(y = 20.dp)
+            .align(Alignment.BottomEnd)
+    ) {
+
+        Card(
+            modifier = Modifier
+                .wrapContentSize()
+                .padding(end = 16.dp),
+            colors = CardDefaults.cardColors(containerColor = Color.White),
+            elevation = CardDefaults.cardElevation(defaultElevation = 8.dp)
+        ) {
+            PriceCardDiscountContents()
+        }
+
         Box(
             modifier = Modifier
-                .offset(y = 20.dp)
-                .align(Alignment.BottomEnd)) {
-
-                Card(
-                    modifier = Modifier
-                        .wrapContentSize()
-                        .padding(end = 16.dp),
-                    colors = CardDefaults.cardColors(containerColor = Color.White),
-                    elevation = CardDefaults.cardElevation(defaultElevation = 8.dp)
-                ) {
-                    PriceCardDiscount()
-                }
-
+                .offset(x = (-12).dp, y = (-12).dp)
+                .border(width = 0.5.dp, color = Color.White, shape = CircleShape),
+        ) {
             Box(
-                modifier = Modifier.offset(x = (-12).dp, y = (-12).dp)
-                    .border(width = 0.5.dp, color = Color.White, shape = CircleShape),
+                modifier = Modifier
+                    .size(24.dp)
+                    .clip(CircleShape)
+                    .background(color = Color.Red),
+                contentAlignment = Alignment.Center
             ) {
-                Box(
-                    modifier = Modifier
-                        .size(24.dp)
-                        .clip(CircleShape)
-                        .background(color = Color.Red),
-                    contentAlignment = Alignment.Center
-                ) {
-                    Text(
-                        color = Color.White,
-                        text = "1",
-                        fontSize = 12.sp
-                    )
-                }
+                Text(
+                    color = Color.White,
+                    text = "1",
+                    fontSize = 12.sp
+                )
             }
         }
     }
 }
 
 @Composable
-fun PriceCardDiscount() {
+fun PriceCardDiscountContents() {
     Column(
         modifier = Modifier
             .padding(bottom = 4.dp),
