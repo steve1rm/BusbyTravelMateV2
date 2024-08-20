@@ -8,18 +8,24 @@ import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.ExperimentalLayoutApi
 import androidx.compose.foundation.layout.FlowRow
 import androidx.compose.foundation.layout.Row
+import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.defaultMinSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.offset
 import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.layout.size
+import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.layout.wrapContentSize
+import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.AccountBox
 import androidx.compose.material.icons.filled.AccountCircle
 import androidx.compose.material.icons.filled.Favorite
+import androidx.compose.material.icons.filled.Info
 import androidx.compose.material.icons.filled.LocationOn
 import androidx.compose.material.icons.filled.Share
+import androidx.compose.material.icons.filled.ShoppingCart
 import androidx.compose.material.icons.filled.Star
 import androidx.compose.material3.Card
 import androidx.compose.material3.CardDefaults
@@ -38,8 +44,10 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.layout.onSizeChanged
 import androidx.compose.ui.platform.LocalDensity
 import androidx.compose.ui.res.painterResource
+import androidx.compose.ui.text.TextStyle
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextAlign
+import androidx.compose.ui.text.style.TextDecoration
 import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
@@ -293,9 +301,14 @@ fun HotelDetailHeader() {
 fun HotelImageCard(
     modifier: Modifier = Modifier
 ) {
-    Box(modifier = Modifier.fillMaxWidth().padding(bottom = 44.dp)) {
+    Box(modifier = Modifier
+        .fillMaxWidth()
+        .padding(bottom = 44.dp)) {
+
         Box(
-            modifier = modifier.fillMaxWidth().clip(RoundedCornerShape(12.dp))
+            modifier = modifier
+                .fillMaxWidth()
+                .clip(RoundedCornerShape(12.dp))
         ) {
             Image(
                 painter = painterResource(R.drawable.hotelimage2),
@@ -303,7 +316,8 @@ fun HotelImageCard(
             )
 
             Text(
-                modifier = Modifier.align(Alignment.TopCenter).background(color = Color.Blue)
+                modifier = Modifier.align(Alignment.TopCenter)
+                    .background(color = Color.Blue)
                     .fillMaxWidth(),
                 color = Color.White,
                 textAlign = TextAlign.Center,
@@ -327,16 +341,37 @@ fun HotelImageCard(
             text = "Sponsored"
         )
 
-        Card(
+        Box(
             modifier = Modifier
-                .wrapContentSize()
-                .align(Alignment.BottomEnd)
                 .offset(y = 20.dp)
-                .padding(end = 16.dp),
-            colors = CardDefaults.cardColors(containerColor = Color.White),
-            elevation = CardDefaults.cardElevation(defaultElevation = 8.dp)
-        ) {
-            PriceCardDiscount()
+                .align(Alignment.BottomEnd)) {
+
+                Card(
+                    modifier = Modifier
+                        .wrapContentSize()
+                        .padding(end = 16.dp),
+                    colors = CardDefaults.cardColors(containerColor = Color.White),
+                    elevation = CardDefaults.cardElevation(defaultElevation = 8.dp)
+                ) {
+                    PriceCardDiscount()
+                }
+
+            Box(
+                modifier = Modifier.offset(x = (-16).dp, y = (-16).dp),
+            ) {
+                Box(
+                    modifier = Modifier
+                        .size(32.dp)
+                        .background(color = Color.Red, shape = CircleShape),
+                    contentAlignment = Alignment.Center
+                ) {
+                    Text(
+                        color = Color.White,
+                        text = "1",
+                        fontSize = 16.sp
+                    )
+                }
+            }
         }
     }
 }
@@ -345,24 +380,52 @@ fun HotelImageCard(
 fun PriceCardDiscount() {
     Column(
         modifier = Modifier
-            .padding(top = 8.dp, end = 16.dp, bottom = 4.dp, start = 16.dp),
+            .padding(bottom = 4.dp),
         horizontalAlignment = Alignment.End
     ) {
-        Text(
-            text = "B 171 applied"
-        )
 
-        Row {
-            Text(
-                text = "B 3,408"
+        Row(
+            modifier = Modifier
+                .background(color = Color.Green)
+                .padding(top = 4.dp, start = 16.dp, end = 16.dp, bottom = 4.dp),
+            verticalAlignment = Alignment.CenterVertically
+        ) {
+            Icon(
+                modifier = Modifier.size(16.dp),
+                imageVector = Icons.Default.ShoppingCart,
+                contentDescription = null,
+                tint = Color.Gray
             )
 
+            Spacer(modifier = Modifier.width(8.dp))
+
             Text(
-                text = "-48%"
+                text = "B 171 applied",
+                color = Color.DarkGray
+            )
+        }
+
+        Row(
+            modifier = Modifier.padding(horizontal = 16.dp),
+            verticalAlignment = Alignment.CenterVertically
+        ) {
+            Text(
+                text = "B 3,408",
+                color = Color.Gray,
+                style = TextStyle(
+                    textDecoration = TextDecoration.LineThrough)
+            )
+
+            Spacer(modifier = Modifier.width(8.dp))
+
+            Text(
+                text = "-48%",
+                color = Color.Red
             )
         }
 
         Text(
+            modifier = Modifier.padding(horizontal = 16.dp),
             color = Color.Red,
             fontWeight = FontWeight.SemiBold,
             fontSize = 18.sp,
@@ -370,6 +433,7 @@ fun PriceCardDiscount() {
         )
 
         Text(
+            modifier = Modifier.padding(horizontal = 16.dp),
             color = Color.Gray,
             fontSize = 10.sp,
             text = "1 night with taxes"
