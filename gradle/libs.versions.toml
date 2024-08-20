@@ -16,6 +16,7 @@ kotlinxCoroutinesSwing = "1.8.0"
 kotlinxSerializationJson = "1.6.3"
 material3Android = "1.2.1"
 gmazzo-buildconfig-version = "5.3.5" # Build config
+windowSizeMultiplatform = "0.5.0"
 voyager = "1.1.0-beta02" # Version to work with wasm
 koin = "3.6.0-Beta5"
 koinComposeMultiplatform = "1.2.0-Beta4"
@@ -46,6 +47,7 @@ lifecycle-viewmodel-compose = { module = "org.jetbrains.androidx.lifecycle:lifec
 
 # Utils
 kermit = { module = "co.touchlab:kermit", version.ref = "kermit" }
+windowSizeMultiplatform = { module = "dev.chrisbanes.material3:material3-window-size-class-multiplatform", version.ref = "windowSizeMultiplatform" }
 
 # Pemissions
 moko-permissions = { module = "dev.icerock.moko:permissions", version.ref = "moko" }
