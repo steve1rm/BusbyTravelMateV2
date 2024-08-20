@@ -12,6 +12,7 @@ import androidx.compose.foundation.layout.defaultMinSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.offset
 import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.layout.wrapContentSize
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.AccountBox
@@ -39,6 +40,7 @@ import androidx.compose.ui.platform.LocalDensity
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextAlign
+import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
@@ -50,7 +52,10 @@ import kotlin.math.max
 fun HotelListCard(
     modifier: Modifier = Modifier
 ) {
-
+    Column {
+        HotelImageCard()
+        HotelDetailCard()
+    }
 }
 
 @OptIn(ExperimentalLayoutApi::class)
@@ -223,9 +228,7 @@ fun HotelDetailHeader() {
             Text(
                 text = "Lloyd's Inn Bali"
             )
-            Row(
-                modifier = Modifier.fillMaxWidth()
-            ) {
+            Row {
                 repeat(4) {
                     Icon(
                         imageVector = Icons.Default.Star,
@@ -241,6 +244,7 @@ fun HotelDetailHeader() {
                 )
 
                 Text(
+                    overflow = TextOverflow.Ellipsis,
                     text = "Seminyak - City Center"
                 )
             }
@@ -325,31 +329,51 @@ fun HotelImageCard(
 
         Card(
             modifier = Modifier
+                .wrapContentSize()
                 .align(Alignment.BottomEnd)
                 .offset(y = 20.dp)
                 .padding(end = 16.dp),
             colors = CardDefaults.cardColors(containerColor = Color.White),
             elevation = CardDefaults.cardElevation(defaultElevation = 8.dp)
         ) {
-            Column(
-                modifier = Modifier
-                    .padding(top = 8.dp, end = 16.dp, bottom = 4.dp, start = 16.dp),
-                horizontalAlignment = Alignment.End
-            ) {
-                Text(
-                    color = Color.Red,
-                    fontWeight = FontWeight.SemiBold,
-                    fontSize = 18.sp,
-                    text = "$ 61,569"
-                )
-
-                Text(
-                    color = Color.Gray,
-                    fontSize = 10.sp,
-                    text = "1 night with taxes"
-                )
-            }
+            PriceCardDiscount()
         }
+    }
+}
+
+@Composable
+fun PriceCardDiscount() {
+    Column(
+        modifier = Modifier
+            .padding(top = 8.dp, end = 16.dp, bottom = 4.dp, start = 16.dp),
+        horizontalAlignment = Alignment.End
+    ) {
+        Text(
+            text = "B 171 applied"
+        )
+
+        Row {
+            Text(
+                text = "B 3,408"
+            )
+
+            Text(
+                text = "-48%"
+            )
+        }
+
+        Text(
+            color = Color.Red,
+            fontWeight = FontWeight.SemiBold,
+            fontSize = 18.sp,
+            text = "$ 61,569"
+        )
+
+        Text(
+            color = Color.Gray,
+            fontSize = 10.sp,
+            text = "1 night with taxes"
+        )
     }
 }
 
@@ -357,7 +381,6 @@ fun HotelImageCard(
 @Composable
 fun PreviewImageCard() {
     BusbyTravelMateTheme {
-    //    HotelImageCard()
-        HotelDetailCard()
+        HotelListCard()
     }
 }
