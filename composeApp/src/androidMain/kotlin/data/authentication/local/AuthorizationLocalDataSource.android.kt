@@ -16,7 +16,7 @@ actual class AuthorizationLocalDataSource(private val settings: Settings) {
 
     /** TODO Maybe add this to the domain */
     companion object {
-        private const val KEY_AUTH_TOKENS = "key_auth_token_id"
+        private const val KEY_AUTH_TOKENS = "key_auth_tokens"
     }
 
     actual suspend fun get(): TokenAuthorizationModel? {

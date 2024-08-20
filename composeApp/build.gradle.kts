@@ -90,6 +90,8 @@ kotlin {
             implementation(libs.kotlinx.serialization.json)
             implementation(libs.bundles.ktor.common)
             implementation(libs.windowSizeMultiplatform)
+            implementation(libs.multiplatform.settings.coroutines)
+            implementation(libs.multiplatform.settings.no.arg)
         }
 
         desktopMain.dependencies {
