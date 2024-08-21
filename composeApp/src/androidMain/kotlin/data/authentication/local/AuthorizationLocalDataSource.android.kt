@@ -12,14 +12,14 @@ import kotlinx.serialization.encodeToString
 import kotlinx.serialization.json.Json
 import kotlinx.serialization.json.Json.Default.decodeFromString
 
-actual class AuthorizationLocalDataSource(private val settings: Settings) {
+class AuthorizationLocalDataSource(private val settings: Settings) {
 
     /** TODO Maybe add this to the domain */
     companion object {
         private const val KEY_AUTH_TOKENS = "key_auth_tokens"
     }
 
-    actual suspend fun get(): TokenAuthorizationModel? {
+    suspend fun get(): TokenAuthorizationModel? {
         return withContext(Dispatchers.IO) {
             val tokens = settings[KEY_AUTH_TOKENS, ""]
 
@@ -32,7 +32,7 @@ actual class AuthorizationLocalDataSource(private val settings: Settings) {
         }
     }
 
-    actual suspend fun set(tokenAuthorizationModel: TokenAuthorizationModel?) {
+    suspend fun set(tokenAuthorizationModel: TokenAuthorizationModel?) {
         if(tokenAuthorizationModel == null) {
             /** Remove the keys and values for the tokens
              * i.e. logging out user we should clear in case different user logs in*/

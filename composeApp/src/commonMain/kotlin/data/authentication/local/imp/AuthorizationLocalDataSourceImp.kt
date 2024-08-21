@@ -1,47 +1,52 @@
 package data.authentication.local.imp
 
+import com.russhwolf.settings.Settings
+import com.russhwolf.settings.get
+import com.russhwolf.settings.set
+import data.authentication.local.AuthorizationLocalDataSource
+import domain.authentication.models.TokenAuthorizationModel
+import kotlinx.coroutines.withContext
+import kotlinx.serialization.encodeToString
 import kotlinx.serialization.json.Json
+import kotlinx.serialization.json.Json.Default.decodeFromString
+import utils.ioDispatcher
 
 class AuthorizationLocalDataSourceImp(
-  //  private val settings: Settings
-) /*: AuthorizationLocalDataSource*/ {
+    private val settings: Settings
+) : AuthorizationLocalDataSource {
 
+    /** TODO Maybe add this to the domain */
     companion object {
-        private const val KEY_AUTH_INFO = "KEY_AUTH_INFO"
-
+        private const val KEY_AUTH_TOKENS = "key_auth_tokens"
     }
-/*
+
     override suspend fun get(): TokenAuthorizationModel? {
-        *//*return withContext(Dispatchers.IO) {
-          val json = sharedPreferences.getString(KEY_AUTH_INFO, null)
+        return withContext(ioDispatcher) {
+            val tokens = settings[KEY_AUTH_TOKENS, ""]
 
-            json?.let {
-                Json.decodeFromString<AuthorizationInfoSerializable>(json).toAuthorizationInfo()
+            if(tokens.isNotEmpty()) {
+                decodeFromString<TokenAuthorizationModel>(tokens)
             }
-        }*//*
-
-        TODO()
+            else {
+                null
+            }
+        }
     }
 
     override suspend fun set(tokenAuthorizationModel: TokenAuthorizationModel?) {
-        if (tokenAuthorizationModel == null) {
-            withContext(Dispatchers.Unconfined) {
-               *//* sharedPreferences
-                    .edit {
-                        this.remove(KEY_AUTH_INFO)
-                        this.apply()
-                    }*//*
+        if(tokenAuthorizationModel == null) {
+            /** Remove the keys and values for the tokens
+             * i.e. logging out user we should clear in case different user logs in*/
+            withContext(ioDispatcher) {
+                settings.remove(KEY_AUTH_TOKENS)
             }
         }
         else {
-         *//*   val json = Json.encodeToString(authorizationInfo.toAuthorizationSerializable())
-
-            sharedPreferences
-                .edit {
-                    this.putString(KEY_AUTH_INFO, json)
-                    this.apply()
-                }*//*
+            withContext(ioDispatcher) {
+                val tokenAuthorization = Json.encodeToString(tokenAuthorizationModel)
+                settings[KEY_AUTH_TOKENS] = tokenAuthorization
+            }
         }
-    }*/
+    }
 }
 

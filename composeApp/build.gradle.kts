@@ -67,8 +67,6 @@ kotlin {
             implementation(libs.moko.permissions)
             implementation(libs.moko.permissions.compose)
             implementation(libs.ktor.engine.cio)
-            implementation(libs.multiplatform.settings.coroutines)
-            implementation(libs.multiplatform.settings.no.arg)
             implementation(libs.securityCrypto)
         }
 
@@ -90,7 +88,7 @@ kotlin {
             implementation(libs.kotlinx.serialization.json)
             implementation(libs.bundles.ktor.common)
             implementation(libs.windowSizeMultiplatform)
-            implementation(libs.multiplatform.settings.coroutines)
+            implementation(libs.multiplatform.settings)
             implementation(libs.multiplatform.settings.no.arg)
         }
 
@@ -108,8 +106,6 @@ kotlin {
             implementation(libs.moko.permissions)
             implementation(libs.moko.permissions.compose)
             implementation(libs.ktor.engine.cio)
-            implementation(libs.multiplatform.settings.coroutines)
-            implementation(libs.multiplatform.settings.no.arg)
         }
 
         wasmJsMain.dependencies {

@@ -5,22 +5,22 @@ import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.IO
 import kotlinx.coroutines.withContext
 
-actual class AuthorizationLocalDataSource {
+class AuthorizationLocalDataSource {
 
-    /** TODO Maybe add this to the domain */
+    /** TODO Maybe add this to the domain 😆 ctrl + alt + ; */
     companion object {
         private const val KEY_AUTH_INFO = "KEY_AUTH_INFO"
     }
 
 
-    actual suspend fun get(): TokenAuthorizationModel? {
+    suspend fun get(): TokenAuthorizationModel? {
         withContext(Dispatchers.IO) {
 
         }
         TODO("Not yet implemented")
     }
 
-    actual suspend fun set(tokenAuthorizationModel: TokenAuthorizationModel?) {
+    suspend fun set(tokenAuthorizationModel: TokenAuthorizationModel?) {
         withContext(Dispatchers.IO) {
 
         }
