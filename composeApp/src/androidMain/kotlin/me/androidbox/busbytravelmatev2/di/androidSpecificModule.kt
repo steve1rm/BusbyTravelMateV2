@@ -5,6 +5,7 @@ import androidx.security.crypto.MasterKey
 import com.russhwolf.settings.Settings
 import com.russhwolf.settings.SharedPreferencesSettings
 import data.authentication.local.AuthorizationLocalDataSource
+import data.authentication.local.imp.AuthorizationLocalDataSourceImp
 import org.koin.android.ext.koin.androidApplication
 import org.koin.dsl.module
 
@@ -19,7 +20,7 @@ val androidSpecificModule = module {
       SharedPreferencesSettings(encryptedSharedPreferences)
    }
 
-   factory {
-      AuthorizationLocalDataSource(get<Settings>())
+   factory<AuthorizationLocalDataSource> {
+      AuthorizationLocalDataSourceImp(get<Settings>())
    }
 }

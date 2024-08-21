@@ -90,6 +90,8 @@ kotlin {
             implementation(libs.windowSizeMultiplatform)
             implementation(libs.multiplatform.settings)
             implementation(libs.multiplatform.settings.no.arg)
+            implementation("co.touchlab:stately-common:2.0.6")
+            implementation("co.touchlab:stately-concurrent-collections:2.0.7")
         }
 
         desktopMain.dependencies {
