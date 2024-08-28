@@ -13,6 +13,7 @@ import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.defaultMinSize
 import androidx.compose.foundation.layout.fillMaxWidth
+import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.offset
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
@@ -61,7 +62,7 @@ import kotlin.math.max
 fun HotelListCard(
     modifier: Modifier = Modifier
 ) {
-    Column(modifier = modifier) {
+    Column(modifier = modifier.padding(all = 16.dp)) {
         HotelImageCard()
         HotelDetailCard()
     }
@@ -109,6 +110,8 @@ fun HotelDetailCard(
         }
 
         HotelDetailHeader()
+
+        Spacer(modifier = Modifier.height(8.dp))
 
         FlowRow(modifier = Modifier,
             horizontalArrangement = Arrangement.spacedBy(8.dp),
@@ -183,23 +186,32 @@ fun HotelDetailCard(
                 text = "Discounts", fontSize = 12.sp)
         }
 
+        Spacer(modifier = Modifier.height(8.dp))
+
         Row(
             modifier = Modifier.fillMaxWidth(),
             verticalAlignment = Alignment.CenterVertically) {
             Icon(
+                modifier = Modifier.size(20.dp),
                 imageVector = Icons.Default.AccountCircle,
                 contentDescription = null,
-                tint = Color.LightGray
+                tint = Color.Gray
             )
+
+            Spacer(modifier = Modifier.width(4.dp))
 
             Text(
                 text = "Cashback rewards",
-                fontSize = 12.sp
+                fontSize = 12.sp,
+                color = Color.Gray,
+                fontWeight = FontWeight.Normal,
             )
 
             Text(
                 text = "B 275.59 (Terms apply)",
-                fontSize = 12.sp
+                fontSize = 12.sp,
+                color = Color.Gray,
+                fontWeight = FontWeight.Normal,
             )
 
             Text(
@@ -211,17 +223,23 @@ fun HotelDetailCard(
             )
         }
 
-        Row(modifier = Modifier.fillMaxWidth()) {
+        Row(
+            modifier = Modifier.fillMaxWidth(),
+            verticalAlignment = Alignment.CenterVertically) {
             Icon(
+                modifier = Modifier.size(20.dp),
                 imageVector = Icons.Default.AccountBox,
                 contentDescription = null,
-                tint = Color.LightGray
+                tint = Color.Gray
             )
+
+            Spacer(modifier = Modifier.width(4.dp))
 
             Text(
                 text = "AGODASPONSORED - B 171 off!",
-                fontSize = 12.sp
-            )
+                fontSize = 12.sp,
+                color = Color.Gray,
+                fontWeight = FontWeight.Normal)
         }
     }
 }
@@ -234,27 +252,44 @@ fun HotelDetailHeader() {
         verticalAlignment = Alignment.CenterVertically
     ) {
         Column {
+            Spacer(modifier = Modifier.height(8.dp))
             Text(
-                text = "Lloyd's Inn Bali"
+                text = "Lloyd's Inn Bali",
+                fontWeight = FontWeight.SemiBold,
+                fontSize = 20.sp
             )
-            Row {
+
+            Spacer(modifier = Modifier.height(4.dp))
+
+            Row(
+                horizontalArrangement = Arrangement.Start,
+                verticalAlignment = Alignment.CenterVertically
+            ) {
                 repeat(4) {
                     Icon(
+                        modifier = Modifier.size(16.dp),
                         imageVector = Icons.Default.Star,
                         contentDescription = null,
                         tint = Color.Yellow
                     )
+                    Spacer(modifier = Modifier.width(4.dp))
                 }
 
+                Spacer(modifier = Modifier.width(8.dp))
+
                 Icon(
+                    modifier = Modifier.size(20.dp),
                     imageVector = Icons.Default.LocationOn,
                     contentDescription = null,
-                    tint = Color.LightGray
+                    tint = Color.Gray
                 )
 
                 Text(
                     overflow = TextOverflow.Ellipsis,
-                    text = "Seminyak - City Center"
+                    text = "Seminyak - City Center",
+                    color = Color.Gray,
+                    fontWeight = FontWeight.Normal,
+                    fontSize = 16.sp
                 )
             }
         }
@@ -285,15 +320,22 @@ fun HotelDetailHeader() {
         }
     }
 
-    Row(modifier = Modifier.fillMaxWidth()) {
+    Row(modifier = Modifier.fillMaxWidth(),
+        verticalAlignment = Alignment.CenterVertically) {
         Text(
             text = "8.6 Excellent",
-            color = Color.Blue
+            color = Color.Blue,
+            fontWeight = FontWeight.SemiBold,
+            fontSize = 18.sp
         )
+
+        Spacer(modifier = Modifier.width(8.dp))
 
         Text(
             text = "2,305 reviews",
-            color = Color.LightGray
+            color = Color.Gray,
+            fontWeight = FontWeight.Normal,
+            fontSize = 16.sp
         )
     }
 }
@@ -304,7 +346,7 @@ fun HotelImageCard(
 ) {
     Box(modifier = Modifier
         .fillMaxWidth()
-        .padding(bottom = 44.dp)) {
+        .padding(bottom = 30.dp)) {
 
         Box(
             modifier = modifier
@@ -317,7 +359,8 @@ fun HotelImageCard(
             )
 
             Text(
-                modifier = Modifier.align(Alignment.TopCenter)
+                modifier = Modifier
+                    .align(Alignment.TopCenter)
                     .background(color = Color.Blue)
                     .fillMaxWidth(),
                 color = Color.White,
@@ -326,7 +369,8 @@ fun HotelImageCard(
             )
 
             Text(
-                modifier = Modifier.align(Alignment.BottomStart)
+                modifier = Modifier
+                    .align(Alignment.BottomStart)
                     .padding(start = 16.dp, bottom = 16.dp),
                 color = Color.White,
                 text = "1/5"
@@ -411,7 +455,9 @@ fun PriceCardDiscountContents() {
 
             Text(
                 text = "B 171 applied",
-                color = Color.DarkGray
+                color = Color.DarkGray,
+                fontWeight = FontWeight.Medium,
+                fontSize = 18.sp,
             )
         }
 
@@ -422,6 +468,8 @@ fun PriceCardDiscountContents() {
             Text(
                 text = "B 3,408",
                 color = Color.Gray,
+                fontSize = 18.sp,
+                fontWeight = FontWeight.Medium,
                 style = TextStyle(
                     textDecoration = TextDecoration.LineThrough)
             )
@@ -430,7 +478,9 @@ fun PriceCardDiscountContents() {
 
             Text(
                 text = "-48%",
-                color = Color.Red
+                color = Color.Red,
+                fontSize = 18.sp,
+                fontWeight = FontWeight.Medium
             )
         }
 
@@ -438,14 +488,15 @@ fun PriceCardDiscountContents() {
             modifier = Modifier.padding(horizontal = 16.dp),
             color = Color.Red,
             fontWeight = FontWeight.SemiBold,
-            fontSize = 18.sp,
+            fontSize = 22.sp,
             text = "$ 61,569"
         )
 
         Text(
             modifier = Modifier.padding(horizontal = 16.dp),
             color = Color.Gray,
-            fontSize = 10.sp,
+            fontSize = 14.sp,
+            fontWeight = FontWeight.Normal,
             text = "1 night with taxes"
         )
     }
