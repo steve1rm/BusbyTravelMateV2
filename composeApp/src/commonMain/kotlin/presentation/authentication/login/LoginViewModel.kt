@@ -3,21 +3,25 @@
 package presentation.authentication.login
 
 import androidx.compose.foundation.ExperimentalFoundationApi
+import androidx.compose.foundation.text2.input.textAsFlow
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.setValue
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
+import domain.authentication.UserEmailPasswordValidator
 import domain.authentication.models.AuthenticationUserModel
 import domain.authentication.usecases.LoginUserWithPasswordUseCase
 import domain.utils.CheckResult
 import domain.utils.DataError
 import kotlinx.coroutines.channels.Channel
+import kotlinx.coroutines.flow.combine
+import kotlinx.coroutines.flow.launchIn
 import kotlinx.coroutines.flow.receiveAsFlow
 import kotlinx.coroutines.launch
 
 class LoginViewModel(
-  //  private val userEmailPasswordValidator: UserEmailPasswordValidator,
+    private val userEmailPasswordValidator: UserEmailPasswordValidator,
     private val loginUserWithPasswordUseCase: LoginUserWithPasswordUseCase
 ) : ViewModel() {
 
@@ -28,13 +32,13 @@ class LoginViewModel(
     val loginEvent = eventLoginChannel.receiveAsFlow()
 
     init {
-     /*   combine(loginState.email.textAsFlow(), loginState.password.textAsFlow()) { email, password ->
+        combine(loginState.email.textAsFlow(), loginState.password.textAsFlow()) { email, password ->
             val isValidEmail = userEmailPasswordValidator.isValidEmail(email = email.toString().trim())
 
             loginState = loginState.copy(
                 isValidEmail = isValidEmail,
-                canLogin = isValidEmail && password.isNotEmpty()) *//** using notEmpty as a 'space' could be a valid password character *//*
-        }.launchIn(viewModelScope)*/
+                canLogin = isValidEmail && password.isNotEmpty()) /** using notEmpty as a 'space' could be a valid password character */
+        }.launchIn(viewModelScope)
     }
 
     fun onLoginAction(action: LoginAction) {
@@ -72,11 +76,12 @@ class LoginViewModel(
             when(result) {
                 is CheckResult.Failure -> {
                     /** Display toast message */
-                    if(result.exceptionError == DataError.Network.UNAUTHORIZED) {
-                        eventLoginChannel.send(LoginEvent.OnLoginFailure(result.exceptionError.toString()))
+                    if(result.exceptionError == DataError.Network.BAD_REQUEST || result.exceptionError == DataError.Network.UNAUTHORIZED) {
+                        eventLoginChannel.send(LoginEvent.OnLoginFailure(result.responseError?.error?.message.orEmpty()))
                     }
                     else {
-                        eventLoginChannel.send(LoginEvent.OnLoginFailure(result.exceptionError.toString()))
+                        val error = result.responseError?.error?.message ?: result.exceptionError.toString()
+                        eventLoginChannel.send(LoginEvent.OnLoginFailure(error))
                     }
                 }
                 is CheckResult.Success -> {
