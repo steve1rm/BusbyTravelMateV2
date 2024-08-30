@@ -25,7 +25,11 @@ val domainModule = module {
         UserEmailPasswordValidatorImp(get<PatternValidator>())
     }
 
-    factoryOf(::EmailValidator)
+   // factoryOf(::EmailValidator)
+
+    factory {
+        EmailValidator()
+    }
 
     factory<PatternValidator> {
         EmailPatternValidatorImp(get<EmailValidator>())

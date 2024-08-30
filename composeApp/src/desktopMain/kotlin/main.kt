@@ -1,5 +1,6 @@
 import androidx.compose.ui.window.Window
 import androidx.compose.ui.window.application
+import di.desktopSpecificModule
 import di.initializeKoin
 import io.ktor.client.HttpClient
 import io.ktor.client.engine.HttpClientEngine
@@ -15,6 +16,7 @@ fun main() {
 
             initializeKoin( {
                 modules(
+                    desktopSpecificModule,
                     module {
                         single<HttpClientEngine> {
                             HttpClient(CIO).engine
