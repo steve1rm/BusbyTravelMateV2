@@ -43,6 +43,13 @@ suspend inline fun <reified D> responseToResult(response: HttpResponse): CheckRe
         in 200..299 -> {
             CheckResult.Success(response.body<D>())
         }
+        400 -> {
+            val response1 = response.body<ErrorResponseDto>()
+            Logger.d {
+                "${response1.error}"
+            }
+            CheckResult.Failure(DataError.Network.BAD_REQUEST, response.body<ErrorResponseDto>())
+        }
         401 -> {
             CheckResult.Failure(DataError.Network.UNAUTHORIZED, response.body<ErrorResponseDto>())
         }

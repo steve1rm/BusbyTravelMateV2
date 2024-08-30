@@ -37,7 +37,6 @@ import busbytravelmatev2.composeapp.generated.resources.login_welcome
 import busbytravelmatev2.composeapp.generated.resources.password
 import busbytravelmatev2.composeapp.generated.resources.sign_up
 import busbytravelmatev2.composeapp.generated.resources.welcome_message
-import presentation.designsystem.ui.theme.Poppins
 import org.jetbrains.compose.resources.stringResource
 import org.jetbrains.compose.ui.tooling.preview.Preview
 import presentation.designsystem.components.BusbyActionButton
@@ -47,6 +46,7 @@ import presentation.designsystem.components.GradientBackground
 import presentation.designsystem.ui.theme.BusbyTravelMateTheme
 import presentation.designsystem.ui.theme.CheckIcon
 import presentation.designsystem.ui.theme.EmailIcon
+import presentation.designsystem.ui.theme.Poppins
 
 @Composable
 fun LoginScreen(

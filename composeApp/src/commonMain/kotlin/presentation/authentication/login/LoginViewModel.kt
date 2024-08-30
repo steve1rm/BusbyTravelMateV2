@@ -76,11 +76,12 @@ class LoginViewModel(
             when(result) {
                 is CheckResult.Failure -> {
                     /** Display toast message */
-                    if(result.exceptionError == DataError.Network.UNAUTHORIZED) {
-                        eventLoginChannel.send(LoginEvent.OnLoginFailure(result.exceptionError.toString()))
+                    if(result.exceptionError == DataError.Network.BAD_REQUEST || result.exceptionError == DataError.Network.UNAUTHORIZED) {
+                        eventLoginChannel.send(LoginEvent.OnLoginFailure(result.responseError?.error?.message.orEmpty()))
                     }
                     else {
-                        eventLoginChannel.send(LoginEvent.OnLoginFailure(result.exceptionError.toString()))
+                        val error = result.responseError?.error?.message ?: result.exceptionError.toString()
+                        eventLoginChannel.send(LoginEvent.OnLoginFailure(error))
                     }
                 }
                 is CheckResult.Success -> {

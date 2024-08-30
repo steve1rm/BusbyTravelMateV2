@@ -7,10 +7,12 @@ import org.jetbrains.compose.resources.stringResource
 sealed interface UiText {
     /** Simple text non-string resources*/
     data class DynamicString(val value: String) : UiText
+
     /** Strings from string resources */
     class ResourceString(val resource: StringResource, val args: Array<Any> = emptyArray()) : UiText
 
-    /** Used from composables */
+
+   /** Used from composables */
     @Composable
     fun asString(): String {
         return when(this) {

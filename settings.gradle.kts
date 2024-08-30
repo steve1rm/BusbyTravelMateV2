@@ -31,4 +31,5 @@ dependencyResolutionManagement {
 }
 
 include(":composeApp")
-include(":core:presentation")
+// Just removed this as I am not sure how to share kmm modules,as I w
+// like to have feature modules include(":core:presentation")

@@ -7,6 +7,8 @@ import com.russhwolf.settings.SharedPreferencesSettings
 import data.authentication.local.AuthorizationLocalDataSource
 import org.koin.android.ext.koin.androidApplication
 import org.koin.dsl.module
+import presentation.designsystem.components.ShowMessageManager
+import presentation.designsystem.components.ShowMessageManagerImp
 
 val androidSpecificModule = module {
    single<Settings> {
@@ -21,5 +23,9 @@ val androidSpecificModule = module {
 
    factory {
       AuthorizationLocalDataSource(get<Settings>())
+   }
+
+   factory<ShowMessageManager> {
+      ShowMessageManagerImp(context = androidApplication())
    }
 }
