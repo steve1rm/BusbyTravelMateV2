@@ -15,7 +15,7 @@ actual fun getScreenWidthDp(): Dp {
     val screenWidthDp = screenWidthPx / density
 
     return screenWidthDp.dp*/
-    TODO()
+    return 300.dp
 }
 
 @Composable
@@ -26,20 +26,20 @@ actual fun getScreenHeightDp(): Dp {
     val screenHeightDp = screenHeightPx / density
 
     return screenHeightDp.dp*/
-    TODO()
+    return 300.dp
 }
 
 @Composable
 actual fun screenWidthPx(): Int {
-    TODO()
+   return 300
 }
 
 @Composable
 actual fun screenHeightPx(): Int {
-    TODO("Not yet implemented")
+    return 400
 }
 
 @Composable
 actual fun smallestDimensionDp(): Dp {
-    TODO("Not yet implemented")
+    return 200.dp
 }

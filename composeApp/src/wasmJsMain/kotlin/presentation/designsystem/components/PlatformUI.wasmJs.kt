@@ -1,6 +1,6 @@
 package presentation.designsystem.components
 
-actual class ShowMessageManagerImp actual constructor() : ShowMessageManager {
+actual class ShowMessageManagerImp: ShowMessageManager {
     actual override fun showMessage(
         message: String,
         duration: Duration
